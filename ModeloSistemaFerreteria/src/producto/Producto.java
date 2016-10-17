@@ -11,11 +11,12 @@ package producto;
  */
 public class Producto {
     
-    public Producto(String codigo, String descripcion, String unidadMedida, double precio) {
+    public Producto(String codigo, String descripcion, String unidadMedida, double precio, boolean activo) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.precio = precio;
+        this.activo = activo;
     }
 
     public void setDescripcion(String descripcion) {
@@ -27,6 +28,10 @@ public class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
 
     public String getCodigo() {
         return codigo;
@@ -39,10 +44,14 @@ public class Producto {
     }
     public double getPrecio() {
         return precio;
-    }    
+    }
+    public boolean isActivo() {
+        return activo;
+    }
     
     String codigo;
     String descripcion;
     String unidadMedida;
     double precio;
+    boolean activo;
 }
