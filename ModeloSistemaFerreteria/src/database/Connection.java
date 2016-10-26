@@ -5,12 +5,24 @@
  */
 package database;
 
+import com.mysql.jdbc.Statement;
+import java.sql.*;
+
 /**
  *
  * @author Michael Chen W.
  */
 public class Connection {
     
-    
+    public boolean connect() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/localhost" + "user = root & password = root");
+            return true;            
+        } catch (Exception e) {
+            
+        }
+        return false;
+    }
     
 }
