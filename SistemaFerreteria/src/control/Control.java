@@ -5,6 +5,7 @@
  */
 package control;
 
+import Interfaz.*;
 import database.Connection;
 
 
@@ -16,6 +17,17 @@ public class Control {
     
     public Control() {
         Connection con = new Connection();
+        
+        login = new VentanaLogin(this);
     }
     
+    public void mostrarLogin() {
+        login.show();
+    }
+    public void login(String username, String password) {
+        System.out.println("little success!");
+    }
+    
+    
+    VentanaLogin login;
 }

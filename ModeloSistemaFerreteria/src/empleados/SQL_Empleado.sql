@@ -25,6 +25,6 @@ CREATE TABLE Empleado (
 );
 
 INSERT INTO Empleado (ID_Empleado, Nombre, isAdministrador, isBodeguero, isDespachador, isCajero, isVendedor) 
-            VALUES   (123456, Pedro, 1, 1, 1, 1, 1);
+            VALUES   (123456, Jaimico, password, 1, 1, 1, 1, 1);
 
     
