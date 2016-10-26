@@ -5,10 +5,17 @@
  */
 package control;
 
+import database.Connection;
+
+
 /**
  *
  * @author Michael Chen W.
  */
 public class Control {
+    
+    public Control() {
+        Connection con = new Connection();
+    }
     
 }

@@ -5,6 +5,8 @@
  */
 package sistemaferreteria;
 
+import control.Control;
+
 /**
  *
  * @author Michael Chen W.
@@ -15,6 +17,8 @@ public class SistemaFerreteria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        Control c = new Control();
         // TODO code application logic here
     }
     
