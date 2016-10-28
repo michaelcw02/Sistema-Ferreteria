@@ -22,14 +22,14 @@ public class Factura {
         this.vendedor = vendedor;
         detalles = new LinkedList<>();
         fecha = new DateTime();
-        activo = true;
+        pagado = false;
     }
 
     public void setDescuento(double descuento) {
         this.descuento = descuento;
     }
     public void setActivo(boolean activo) {
-        this.activo = activo;
+        this.pagado = activo;
     }
     
     //BLABLABLA 
@@ -49,5 +49,5 @@ public class Factura {
     double impuesto;
     double descuento;
     double total;
-    boolean activo;
+    boolean pagado;
 }
