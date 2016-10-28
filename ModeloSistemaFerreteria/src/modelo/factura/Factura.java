@@ -23,6 +23,7 @@ public class Factura {
         detalles = new LinkedList<>();
         fecha = new DateTime();
         pagado = false;
+        despachado = false;
     }
 
     public void setDescuento(double descuento) {
@@ -32,6 +33,9 @@ public class Factura {
         this.pagado = activo;
     }
     
+    public double getTotal() {
+        return total;
+    }
     //BLABLABLA 
     
 
@@ -50,4 +54,5 @@ public class Factura {
     double descuento;
     double total;
     boolean pagado;
+    boolean despachado;
 }
