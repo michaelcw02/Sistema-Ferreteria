@@ -8,7 +8,6 @@ package modelo.inventarios;
 import java.util.Date;
 import java.util.Objects;
 import modelo.productos.Producto;
-import org.joda.time.DateTime;
 
 
 /**
