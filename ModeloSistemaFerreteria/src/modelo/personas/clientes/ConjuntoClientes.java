@@ -11,8 +11,8 @@ import java.util.LinkedList;
  *
  * @author Michael Chen W.
  */
-public class ListaClientes {
-    public ListaClientes() {
+public class ConjuntoClientes {
+    public ConjuntoClientes() {
         clientes = new LinkedList<>();
     }
     

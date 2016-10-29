@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.factura;
+package modelo.inventarios;
 
 import java.util.LinkedList;
 
@@ -11,18 +11,15 @@ import java.util.LinkedList;
  *
  * @author Michael Chen W.
  */
-public class ListaFactura {
+public class ConjuntoInventarios {
 
-    public ListaFactura() {
-        facturas = new LinkedList<>();
+    public ConjuntoInventarios() {
+        inventarios = new LinkedList<>();
     }
     
-    public void agregarFactura(Factura fac) {
-        facturas.add(fac);
+    public void agregar(Inventario item) {
+        inventarios.add(item);
     }
     
-//BLABLABLA    
-    
-    
-    LinkedList<Factura> facturas;
+    LinkedList<Inventario> inventarios;
 }

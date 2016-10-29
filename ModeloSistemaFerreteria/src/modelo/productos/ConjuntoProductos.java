@@ -11,9 +11,9 @@ import java.util.LinkedList;
  *
  * @author Michael Chen W.
  */
-public class ListaProductos {
+public class ConjuntoProductos {
 
-    public ListaProductos() {
+    public ConjuntoProductos() {
         productos = new LinkedList<>();
     }
     
