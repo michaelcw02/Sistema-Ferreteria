@@ -13,6 +13,12 @@ import modelo.productos.Producto;
  */
 public class LineaDetalle {
 
+    public LineaDetalle() {
+        producto = null;
+        cantidad = 0;
+        precio = 0;
+        despachado = false;
+    }
     public LineaDetalle(Producto producto, int cantidad, double precio) {
         this.producto = producto;
         this.cantidad = cantidad;

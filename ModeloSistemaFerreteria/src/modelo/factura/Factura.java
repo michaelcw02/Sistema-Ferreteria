@@ -16,6 +16,15 @@ import modelo.personas.empleados.Empleado;
  */
 public class Factura {
 
+    public Factura() {
+        codigo = -1;
+        cliente = null;
+        vendedor = null;
+        fecha = null;
+        detalles = null;
+        pagado = false;
+        despachado = false;
+    }    
     public Factura(int codigo, Cliente cliente, Empleado vendedor) {
         this.codigo = codigo;
         this.cliente = cliente;
@@ -26,21 +35,65 @@ public class Factura {
         despachado = false;
     }
 
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
-    public void setActivo(boolean activo) {
-        this.pagado = activo;
-    }
-    
-    public double getTotal() {
-        return total;
-    }
-    //BLABLABLA 
-    
 
-    //THERE IS STILL MISSING ALL THE METHODS THAT A FACTURA HAS TO DO.
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
+    public void setVendedor(Empleado vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setDetalles(LinkedList<LineaDetalle> detalles) {
+        this.detalles = detalles;
+    }
+
+    public void setPagado(boolean pagado) {
+        this.pagado = pagado;
+    }
+
+    public void setDespachado(boolean despachado) {
+        this.despachado = despachado;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Empleado getVendedor() {
+        return vendedor;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public LinkedList<LineaDetalle> getDetalles() {
+        return detalles;
+    }
+
+    public boolean isPagado() {
+        return pagado;
+    }
+
+    public boolean isDespachado() {
+        return despachado;
+    }
+
+    public Double getTotal() {
+        return 1000.234;    //THIS IS TEMPORARY
+    }
     
     
     
@@ -49,10 +102,6 @@ public class Factura {
     Empleado vendedor;
     Date fecha;
     LinkedList<LineaDetalle> detalles;
-    double subtotal;
-    double impuesto;
-    double descuento;
-    double total;
     boolean pagado;
     boolean despachado;
 }
