@@ -6,6 +6,7 @@
 package sistemaferreteria;
 
 import control.Control;
+import modelo.database.DataBaseConnection;
 
 /**
  *
@@ -17,6 +18,8 @@ public class SistemaFerreteria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        DataBaseConnection conn = new DataBaseConnection();
         
         Control c = new Control();
         c.mostrarLogin();
