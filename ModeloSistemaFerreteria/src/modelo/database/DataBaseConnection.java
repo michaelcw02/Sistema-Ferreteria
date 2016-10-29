@@ -17,7 +17,6 @@ import java.sql.Statement;
 import java.util.Properties;
 
 
-
 /**
  *
  * @author Michael Chen W.
@@ -29,8 +28,9 @@ public class DataBaseConnection {
     }
     public Connection getConnection(){
         try {
+            
             Properties prop = new Properties();
-            URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
+            URL resourceUrl = this.getClass().getResource(PROPERTIES_FILE_NAME);
             File file = new File(resourceUrl.toURI());            
             prop.load(new BufferedInputStream(new FileInputStream(file)));
             String driver = prop.getProperty("database_driver");
@@ -70,6 +70,6 @@ public class DataBaseConnection {
     }
     
     
-    public static final String PROPERTIES_FILE_NAME="//ferreteria.properties";        
+    public static final String PROPERTIES_FILE_NAME="/ferreteria.properties";        
     Connection cnx;
 }
