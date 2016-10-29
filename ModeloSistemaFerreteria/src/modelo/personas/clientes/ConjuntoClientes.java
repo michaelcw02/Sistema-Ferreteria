@@ -19,8 +19,12 @@ public class ConjuntoClientes {
     public ConjuntoClientes() {
         dbc = new DataBaseConnection();
     }
+    public ConjuntoClientes(DataBaseConnection dbc) {
+        this.dbc = dbc;
+    }
     
-    public Cliente getEmpleadoByID(String id) throws Exception{
+    
+    public Cliente getClienteByID(String id) throws Exception{
         String query = "SELECT * " + "FROM Cliente WHERE Cedula = '%s'";
         query = String.format(query, id);
         ResultSet rs = dbc.executeQuery(query);
