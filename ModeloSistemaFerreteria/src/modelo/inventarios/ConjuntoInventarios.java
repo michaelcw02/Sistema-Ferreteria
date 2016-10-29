@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import modelo.database.DataBaseConnection;
+import modelo.productos.ConjuntoProductos;
+import modelo.productos.Producto;
 
 /**
  *
@@ -100,17 +102,23 @@ public class ConjuntoInventarios {
         }
     }
     
-    private Inventario inventario(ResultSet rs) {
+    private Inventario inventario(ResultSet rs) throws Exception {
         try {
             Inventario inv = new Inventario();
             inv.setFecha(rs.getDate("Fecha"));
-            //inv.setProducto(rs.getString("Producto"));
+            String codProducto = rs.getString("Producto");
+            inv.setProducto(getProducto(codProducto));
             inv.setCantidad(rs.getInt("Cantidad"));
             inv.setActivo(rs.getBoolean("isActivo"));
             return inv;            
         } catch (SQLException ex) {
             return null;
         }
+    }
+    
+    public Producto getProducto(String cod) throws Exception {
+        ConjuntoProductos cp = new ConjuntoProductos(dbc);
+        return cp.getProductoByCod(cod);
     }
     
     private Date getTimeFormat(Date fecha) {
