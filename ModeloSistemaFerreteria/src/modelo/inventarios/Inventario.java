@@ -5,6 +5,7 @@
  */
 package modelo.inventarios;
 
+import java.util.Date;
 import java.util.Objects;
 import modelo.productos.Producto;
 import org.joda.time.DateTime;
@@ -16,7 +17,14 @@ import org.joda.time.DateTime;
  */
 public class Inventario {
 
-    public Inventario(DateTime fecha, Producto producto, int cantidad) {
+    public Inventario() {
+        fecha = null;
+        producto = null;
+        cantidad = 0;
+        activo = false;
+    }
+    
+    public Inventario(Date fecha, Producto producto, int cantidad) {
         this.fecha = fecha;
         this.producto = producto;
         this.cantidad = cantidad;
@@ -24,7 +32,7 @@ public class Inventario {
             activo = true;
     }
 
-    public void setFecha(DateTime fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -32,7 +40,15 @@ public class Inventario {
         this.producto = producto;
     }
 
-    public DateTime getFecha() {
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public Date getFecha() {
         return fecha;
     }
 
@@ -40,6 +56,14 @@ public class Inventario {
         return producto;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -67,7 +91,7 @@ public class Inventario {
         return true;
     }
     
-    DateTime fecha;
+    Date fecha;
     Producto producto;
     int cantidad;
     boolean activo = false;
