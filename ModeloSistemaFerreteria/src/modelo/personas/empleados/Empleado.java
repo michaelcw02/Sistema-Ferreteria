@@ -10,15 +10,43 @@ package modelo.personas.empleados;
  * @author Michael Chen W.
  */
 public class Empleado {
+    
+    public Empleado() {
+        idEmpleado = "";
+        nombre = "";
+        apellido = "";
+        clave = "";
+        activo = false;
+        vendedor = false;
+        cajero = false;
+        despachador = false;
+        bodeguero = false;
+        administrador = false;
+    }
 
-    public Empleado(int idEmpleado, String nombre, String apellido, String clave) {
+    public Empleado(String idEmpleado, String nombre, String apellido, String clave) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellido = apellido;
         this.clave = clave;
         activo = true;
     }
-    
+
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
@@ -38,7 +66,7 @@ public class Empleado {
         this.administrador = administrador;
     }
     
-    public int getIdEmpleado() {
+    public String getIdEmpleado() {
         return idEmpleado;
     }
     public String getNombre() {
@@ -69,7 +97,7 @@ public class Empleado {
         return administrador;
     }
     
-    int idEmpleado;
+    String idEmpleado;
     String nombre;
     String apellido;
     String clave;
