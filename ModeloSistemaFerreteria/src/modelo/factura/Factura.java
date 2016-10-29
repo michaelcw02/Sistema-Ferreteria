@@ -5,10 +5,10 @@
  */
 package modelo.factura;
 
+import java.util.Date;
 import java.util.LinkedList;
 import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Factura {
         this.cliente = cliente;
         this.vendedor = vendedor;
         detalles = new LinkedList<>();
-        fecha = new DateTime();
+        fecha = new Date();
         pagado = false;
         despachado = false;
     }
@@ -47,7 +47,7 @@ public class Factura {
     int codigo; //autogenerado..
     Cliente cliente;
     Empleado vendedor;
-    DateTime fecha;
+    Date fecha;
     LinkedList<LineaDetalle> detalles;
     double subtotal;
     double impuesto;
