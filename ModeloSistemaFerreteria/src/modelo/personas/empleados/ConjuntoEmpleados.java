@@ -53,7 +53,7 @@ public class ConjuntoEmpleados {
         }
     }
     public void addEmpleado(Empleado emp) throws Exception{
-        String query = "INSERT INTO EMPLEADO (ID_EMPLEADO, Nombre, Clave, isActivo, isAdministrador, isBodeguero, isCajero, isDespachador, isVendedor) "
+        String query = "INSERT INTO Empleado (ID_EMPLEADO, Nombre, Clave, isActivo, isAdministrador, isBodeguero, isCajero, isDespachador, isVendedor) "
                     + "VALUES('%s', '%s','%s','%b','%b','%b','%b','%b')";
         query = String.format(query, emp.getIdEmpleado(), emp.getNombre(), emp.getClave(), emp.isActivo(), emp.isAdministrador(), 
                                     emp.isBodeguero(), emp.isCajero(), emp.isDespachador(), emp.isVendedor());
