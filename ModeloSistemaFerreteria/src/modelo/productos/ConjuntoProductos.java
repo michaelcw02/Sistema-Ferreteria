@@ -19,8 +19,12 @@ public class ConjuntoProductos {
     public ConjuntoProductos() {
         dbc = new DataBaseConnection();
     }
+    public ConjuntoProductos(DataBaseConnection dbc) {
+        this.dbc = dbc;
+    }
+
     
-    public Producto getEmpleadoByCod(String cod) throws Exception{
+    public Producto getProductoByCod(String cod) throws Exception{
         String query = "SELECT * " + "FROM Producto WHERE Codigo = '%s'";
         query = String.format(query, cod);
         ResultSet rs = dbc.executeQuery(query);
