@@ -5,16 +5,19 @@
  */
 package modelo.cobros;
 
-import modelo.factura.Factura;
-
 /**
  *
  * @author Michael Chen W.
  */
-public class Cobros {
+public class PagoTarjeta {
     
+    public PagoTarjeta(int numero) {
+        this.numero = numero;
+    }
     
+    public int getNumero() {
+        return numero;
+    }
     
-    Factura factura;
-    
+    int numero;
 }

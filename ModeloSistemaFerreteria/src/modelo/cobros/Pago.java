@@ -13,11 +13,10 @@ import modelo.factura.Factura;
  */
 public class Pago {
 
-    public Pago(Factura factura, int tipoPago, double pago, int pagoNumero) {
+    public Pago(Factura factura, int tipoPago, double pago) {
         this.factura = factura;
         this.tipoPago = tipoPago;
         this.pago = pago;
-        this.pagoNumero = pagoNumero;
     }
     
     public double getVuelto() {
@@ -32,5 +31,4 @@ public class Pago {
     Factura factura;
     int tipoPago; //1: Efectivo, 2: Tarjeta, 3: Cheque.
     double pago;
-    int pagoNumero;
 }

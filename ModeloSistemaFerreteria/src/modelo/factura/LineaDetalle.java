@@ -17,6 +17,7 @@ public class LineaDetalle {
         this.producto = producto;
         this.cantidad = cantidad;
         this.precio = precio;
+        this.despachado = false;
     }
 
     public void setProducto(Producto producto) {
@@ -31,6 +32,10 @@ public class LineaDetalle {
         this.precio = precio;
     }
 
+    public void setDespachado(boolean despachado) {
+        this.despachado = despachado;
+    }
+
     public Producto getProducto() {
         return producto;
     }
@@ -42,8 +47,13 @@ public class LineaDetalle {
     public double getPrecio() {
         return precio;
     }
+
+    public boolean isDespachado() {
+        return despachado;
+    }
     
     Producto producto;
     int cantidad;
     double precio;
+    boolean despachado;
 }
