@@ -10,6 +10,14 @@ package modelo.productos;
  * @author Michael Chen W.
  */
 public class Producto {
+
+    public Producto() {
+        codigo = "";
+        descripcion = "";
+        unidadMedida = "";
+        precio = 0;
+        activo = false;        
+    }
     
     public Producto(String codigo, String descripcion, String unidadMedida, double precio, boolean activo) {
         this.codigo = codigo;
@@ -19,6 +27,9 @@ public class Producto {
         this.activo = activo;
     }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
