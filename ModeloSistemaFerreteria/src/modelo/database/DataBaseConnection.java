@@ -6,8 +6,10 @@
 package modelo.database;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,8 +33,8 @@ public class DataBaseConnection {
             
             Properties prop = new Properties();
             URL resourceUrl = this.getClass().getResource(PROPERTIES_FILE_NAME);
-            File file = new File(resourceUrl.toURI());            
-            prop.load(new BufferedInputStream(new FileInputStream(file)));
+            File file = new File(resourceUrl.toURI());    
+            prop.load(new BufferedReader(new InputStreamReader(new FileInputStream(file))));
             String driver = prop.getProperty("database_driver");
             String server = prop.getProperty("database_server");
             String port = prop.getProperty("database_port");
@@ -42,7 +44,6 @@ public class DataBaseConnection {
             
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+database+"?user="+user+"&password="+password;
             Class.forName(driver).newInstance();
-            System.out.print("this shit is working!");
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -60,6 +61,17 @@ public class DataBaseConnection {
             return 0;
         }
     }
+ 
+    public ResultSet executeUpdateWithKeys(String statement) {
+        try {
+            Statement stm = cnx.createStatement();
+            stm.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
+            return stm.getGeneratedKeys();
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
     public ResultSet executeQuery(String statement){
         try {
             Statement stm = cnx.createStatement();
