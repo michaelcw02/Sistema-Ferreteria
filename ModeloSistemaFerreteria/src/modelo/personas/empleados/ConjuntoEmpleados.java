@@ -19,6 +19,11 @@ public class ConjuntoEmpleados {
     public ConjuntoEmpleados() {
         dbc = new DataBaseConnection();
     }
+
+    public ConjuntoEmpleados(DataBaseConnection dbc) {
+        this.dbc = dbc;
+    }
+    
     
     public Empleado getEmpleadoByID(String id) throws Exception{
         String query = "SELECT * " + "FROM Empleado WHERE ID_EMPLEADO = '%s'";
