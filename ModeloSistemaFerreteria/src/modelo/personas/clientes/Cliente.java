@@ -11,6 +11,14 @@ package modelo.personas.clientes;
  */
 public class Cliente {
 
+    public Cliente() {
+        cedula = "";
+        nombre = "";
+        telefono = "";
+        email = "";
+        descuento = 0;
+    }
+    
     public Cliente(String cedula, String nombre, String telefono, String email, int descuento) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -19,43 +27,37 @@ public class Cliente {
         this.descuento = descuento;
     }
 
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
-
+    
     public String getCedula() {
         return cedula;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public String getTelefono() {
         return telefono;
     }
-
     public String getEmail() {
         return email;
     }
-
     public int getDescuento() {
         return descuento;
-    }
-    
-    
+    }    
     
     String cedula;
     String nombre;
