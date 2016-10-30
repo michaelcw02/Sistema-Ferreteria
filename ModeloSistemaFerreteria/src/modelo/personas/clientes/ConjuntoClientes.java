@@ -49,7 +49,7 @@ public class ConjuntoClientes {
         return listaResultado;
     }
     public void deleteCliente(String id) throws Exception{
-        String query = "DELETE " + "FROM Cliente WHERE Cedula = '%s'";
+        String query = "DELETE FROM Cliente WHERE Cedula = '%s'";
         query = String.format(query, id);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
