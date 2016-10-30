@@ -9,12 +9,18 @@ package modelo.cobros;
  *
  * @author Michael Chen W.
  */
-public class PagoTarjeta {
-    
-    public PagoTarjeta(int numero) {
+public class CounterCheque {
+    public CounterCheque(int numero) {
         this.numero = numero;
     }
-    
+
+    public CounterCheque() {
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
     public int getNumero() {
         return numero;
     }
