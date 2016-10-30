@@ -49,7 +49,7 @@ public class ConjuntoProductos {
         return listaResultado;
     }
     public void deleteProducto(String cod) throws Exception{
-        String query = "DELETE " + "FROM Producto WHERE Codigo = '%s'";
+        String query = "DELETE FROM Producto WHERE Codigo = '%s'";
         query = String.format(query, cod);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
