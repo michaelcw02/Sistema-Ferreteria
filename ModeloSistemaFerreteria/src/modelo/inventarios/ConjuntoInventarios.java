@@ -68,7 +68,7 @@ public class ConjuntoInventarios {
         return listaResultado;
     }
     public void deleteInventario(String id) throws Exception{
-        String query = "DELETE " + "FROM Inventario WHERE Cedula = '%s'";
+        String query = "DELETE FROM Inventario WHERE Cedula = '%s'";
         query = String.format(query, id);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
