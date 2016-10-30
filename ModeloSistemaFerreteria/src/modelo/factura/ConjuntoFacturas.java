@@ -83,8 +83,8 @@ public class ConjuntoFacturas {
         return listaResultado;
     }
     public void deleteFactura(String cod) throws Exception{
-        String query = "DELETE " + "FROM Factura WHERE Codigo = '%s'";
-        query = String.format(query, cod);
+        String query = "DELETE FROM Factura, LineaDetalle WHERE Codigo = '%s'";
+        query = String.format(query, cod);  //TALVEZ DA ERROR EL QUERY
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Factura inexistente.");
