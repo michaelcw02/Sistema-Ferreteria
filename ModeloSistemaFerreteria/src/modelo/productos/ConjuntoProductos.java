@@ -57,7 +57,7 @@ public class ConjuntoProductos {
         }
     }
     public void addProducto(Producto product) throws Exception{
-        String query = "INSERT INTO Producto (Codigo, Descripcion, Unidad de Medida, Precio, isActivo)"
+        String query = "INSERT INTO Producto (Codigo, Descripcion, UnidadMedida, Precio, isActivo)"
                     + "VALUES('%s', '%s', '%s', '%d', %b)";
         query = String.format(query, product.getCodigo(), product.getDescripcion(), 
                 product.getUnidadMedida(), product.getPrecio(), product.isActivo());
@@ -67,7 +67,7 @@ public class ConjuntoProductos {
         }
     }
     public void updateProducto(Producto product) throws Exception{
-        String query = "UPDATE Producto SET Descripcion = '%s', Unidad de Medida = '%s', Precio= '%d', isActivo = '%b'" + 
+        String query = "UPDATE Producto SET Descripcion = '%s', UnidadMedida = '%s', Precio= '%d', isActivo = '%b'" + 
                         "WHERE Codigo = '%s'";
         query = String.format(query, product.getDescripcion(), product.getUnidadMedida(), product.getPrecio(), 
                             product.isActivo(), product.getCodigo());
@@ -82,7 +82,7 @@ public class ConjuntoProductos {
             Producto product = new Producto();
             product.setCodigo(rs.getString("Codigo"));
             product.setDescripcion(rs.getString("Nombre"));
-            product.setUnidadMedida(rs.getString("Unidad de Medida"));
+            product.setUnidadMedida(rs.getString("UnidadMedida"));
             product.setPrecio(rs.getDouble("Precio"));
             product.setActivo(rs.getBoolean("isActivo"));
             return product;            
