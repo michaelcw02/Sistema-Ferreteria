@@ -50,7 +50,7 @@ public class ConjuntoEmpleados {
         return listaResultado;
     }
     public void deleteEmpleado(String id) throws Exception{
-        String query = "DELETE " + "FROM Empleado WHERE ID_EMPLEADO = '%s'";
+        String query = "DELETE FROM Empleado WHERE ID_EMPLEADO = '%s'";
         query = String.format(query, id);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
