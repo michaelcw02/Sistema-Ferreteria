@@ -81,7 +81,7 @@ public class ConjuntoProductos {
         try {
             Producto product = new Producto();
             product.setCodigo(rs.getString("Codigo"));
-            product.setDescripcion(rs.getString("Nombre"));
+            product.setDescripcion(rs.getString("Descripcion"));
             product.setUnidadMedida(rs.getString("UnidadMedida"));
             product.setPrecio(rs.getDouble("Precio"));
             product.setActivo(rs.getBoolean("isActivo"));
