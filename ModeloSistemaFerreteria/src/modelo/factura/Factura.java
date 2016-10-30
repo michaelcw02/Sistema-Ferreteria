@@ -93,9 +93,7 @@ public class Factura {
 
     public Double getTotal() {
         return 1000.234;    //THIS IS TEMPORARY
-    }
-    
-    
+    }    
     
     int codigo; //autogenerado..
     Cliente cliente;

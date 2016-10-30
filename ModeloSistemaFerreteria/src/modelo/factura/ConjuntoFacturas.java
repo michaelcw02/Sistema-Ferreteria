@@ -24,8 +24,12 @@ public class ConjuntoFacturas {
     public ConjuntoFacturas() {
         dbc = new DataBaseConnection();
     }
+    public ConjuntoFacturas(DataBaseConnection dbc) {
+        this.dbc = dbc;
+    }
     
-    public Factura getFactura(int codigo) throws Exception{
+    
+    public Factura getFacturaByCod(int codigo) throws Exception{
         String query = "SELECT * " + "FROM Cliente WHERE Codigo = '%d'";
         query = String.format(query, codigo);
         ResultSet rs = dbc.executeQuery(query);
