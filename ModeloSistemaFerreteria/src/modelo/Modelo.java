@@ -5,6 +5,14 @@
  */
 package modelo;
 
+import adaptadores.AdaptadorSubject;
+import modelo.cobros.ConjuntoPagos;
+import modelo.factura.ConjuntoFacturas;
+import modelo.inventarios.ConjuntoInventarios;
+import modelo.personas.clientes.ConjuntoClientes;
+import modelo.personas.empleados.ConjuntoEmpleados;
+import modelo.productos.ConjuntoProductos;
+
 /**
  *
  * @author Michael Chen W.
@@ -23,4 +31,11 @@ public class Modelo {
     
     
     public static Modelo instance;
+    AdaptadorSubject    observers;
+    ConjuntoProductos   conjuntoProductos;
+    ConjuntoEmpleados   conjuntoEmpleados;
+    ConjuntoClientes    conjuntoClientes;
+    ConjuntoInventarios conjuntoInventarios;
+    ConjuntoFacturas    conjuntoFacturas;
+    ConjuntoPagos       conjuntoPagos;  
 }
