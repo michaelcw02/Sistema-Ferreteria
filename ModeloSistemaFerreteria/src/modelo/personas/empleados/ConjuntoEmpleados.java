@@ -32,6 +32,17 @@ public class ConjuntoEmpleados {
             throw new Exception("Empleado inexistente.");
         }
     }
+    public Empleado getEmpleadoByIdAndPass(String id, String pass) throws Exception{
+        String query = "SELECT * " + "FROM Empleado WHERE ID_EMPLEADO = '%s' AND Clave = '%s'";
+        query = String.format(query, id, pass);
+        ResultSet rs = dbc.executeQuery(query);
+        if(rs.next()) {
+            return empleado(rs);
+        }
+        else {
+            throw new Exception("Cliente inexistente.");
+        }
+    }
     public LinkedList<Empleado> searchEmpleadoByName(String nombre) throws Exception{
         LinkedList<Empleado> listaResultado = new LinkedList<>();
         try {
