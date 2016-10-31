@@ -20,8 +20,8 @@ import modelo.productos.Producto;
  */
 public class ConjuntoInventarios {
 
-    public ConjuntoInventarios() {
-        dbc = new DataBaseConnection();
+    public ConjuntoInventarios(DataBaseConnection dbc) {
+        this.dbc = dbc;
     }
     
     public Inventario getInventario(String codigo, Date fecha) throws Exception{

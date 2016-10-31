@@ -21,9 +21,6 @@ import modelo.productos.*;
  */
 public class ConjuntoFacturas {
 
-    public ConjuntoFacturas() {
-        dbc = new DataBaseConnection();
-    }
     public ConjuntoFacturas(DataBaseConnection dbc) {
         this.dbc = dbc;
     }

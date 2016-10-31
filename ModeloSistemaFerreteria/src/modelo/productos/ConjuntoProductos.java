@@ -16,9 +16,6 @@ import modelo.database.DataBaseConnection;
  */
 public class ConjuntoProductos {
 
-    public ConjuntoProductos() {
-        dbc = new DataBaseConnection();
-    }
     public ConjuntoProductos(DataBaseConnection dbc) {
         this.dbc = dbc;
     }

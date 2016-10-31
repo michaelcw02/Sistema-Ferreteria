@@ -16,10 +16,6 @@ import modelo.database.DataBaseConnection;
  */
 public class ConjuntoEmpleados {
 
-    public ConjuntoEmpleados() {
-        dbc = new DataBaseConnection();
-    }
-
     public ConjuntoEmpleados(DataBaseConnection dbc) {
         this.dbc = dbc;
     }

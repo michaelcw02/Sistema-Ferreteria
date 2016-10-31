@@ -7,6 +7,7 @@ package modelo;
 
 import adaptadores.AdaptadorSubject;
 import modelo.cobros.ConjuntoPagos;
+import modelo.database.DataBaseConnection;
 import modelo.factura.ConjuntoFacturas;
 import modelo.inventarios.ConjuntoInventarios;
 import modelo.personas.clientes.ConjuntoClientes;
@@ -20,7 +21,13 @@ import modelo.productos.ConjuntoProductos;
 public class Modelo {
     
     private Modelo() {
-        
+        dbc = new DataBaseConnection();
+        conjuntoProductos = new ConjuntoProductos(dbc);
+        conjuntoEmpleados = new ConjuntoEmpleados(dbc);
+        conjuntoClientes  = new ConjuntoClientes(dbc);
+        conjuntoInventarios = new ConjuntoInventarios(dbc);
+        conjuntoFacturas = new ConjuntoFacturas(dbc);
+        conjuntoPagos = new ConjuntoPagos(dbc);
     }
     static public Modelo getInstance() {
         if(instance == null)
@@ -32,6 +39,7 @@ public class Modelo {
     
     public static Modelo instance;
     AdaptadorSubject    observers;
+    DataBaseConnection  dbc;
     ConjuntoProductos   conjuntoProductos;
     ConjuntoEmpleados   conjuntoEmpleados;
     ConjuntoClientes    conjuntoClientes;

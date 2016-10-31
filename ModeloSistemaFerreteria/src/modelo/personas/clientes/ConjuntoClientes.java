@@ -16,17 +16,24 @@ import modelo.database.DataBaseConnection;
  */
 public class ConjuntoClientes {
     
-    public ConjuntoClientes() {
-        dbc = new DataBaseConnection();
-    }
     public ConjuntoClientes(DataBaseConnection dbc) {
         this.dbc = dbc;
     }
     
-    
     public Cliente getClienteByID(String id) throws Exception{
         String query = "SELECT * " + "FROM Cliente WHERE Cedula = '%s'";
         query = String.format(query, id);
+        ResultSet rs = dbc.executeQuery(query);
+        if(rs.next()) {
+            return cliente(rs);
+        }
+        else {
+            throw new Exception("Cliente inexistente.");
+        }
+    }
+    public Cliente getClienteByIdAndPass(String id, String pass) throws Exception{
+        String query = "SELECT * " + "FROM Cliente WHERE Cedula = '%s' AND Clave = '%s'";
+        query = String.format(query, id, pass);
         ResultSet rs = dbc.executeQuery(query);
         if(rs.next()) {
             return cliente(rs);
