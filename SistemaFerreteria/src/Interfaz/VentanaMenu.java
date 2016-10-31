@@ -6,14 +6,13 @@
 package Interfaz;
 
 import control.Control;
-import interfaces.Observer;
 import modelo.personas.empleados.Empleado;
 
 /**
  *
  * @author Laura Alfaro
  */
-public class VentanaMenu extends javax.swing.JFrame implements Observer{
+public class VentanaMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaMenu
@@ -22,11 +21,6 @@ public class VentanaMenu extends javax.swing.JFrame implements Observer{
         initComponents();
         ctrl=c;
         disableAll();
-    }
-
-    @Override
-    public void update() {
-        
     }
     
     public void updateBanner(String name) {
@@ -122,6 +116,11 @@ public class VentanaMenu extends javax.swing.JFrame implements Observer{
         btnEmpleados.setText("Mantenimiento Empleados");
 
         btnVentas.setText("Ventas");
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
 
         btnDespacho.setText("Despacho");
 
@@ -196,7 +195,14 @@ public class VentanaMenu extends javax.swing.JFrame implements Observer{
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInventarioActionPerformed
-private Control ctrl;
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        this.dispose();
+        ctrl.mostrarVentas();
+    }//GEN-LAST:event_btnVentasActionPerformed
+    
+    
+    private Control ctrl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel banner;
     private javax.swing.JButton btnClientes;

@@ -19,11 +19,11 @@ public class Control {
         modelo = Modelo.getInstance();
         login = new VentanaLogin(this);
         menu  = new VentanaMenu(this);
+        ventas = new VentanaVentas(this);
         //
         setObservers();
     }
     private void setObservers() {
-        modelo.agregar(menu);
         //this keeeps going down.
     }
     
@@ -49,8 +49,17 @@ public class Control {
         return false;
     }
     
+    
+    public void mostrarVentas() {
+        ventas.show();
+    }
+    
+    
+    
+    
     private Modelo modelo;
     private VentanaLogin login;
     private VentanaMenu  menu;
+    private VentanaVentas ventas;
 
 }
