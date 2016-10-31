@@ -17,7 +17,7 @@ public class SistemaFerreteria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+                
         Control c = new Control();
         c.mostrarLogin();
         
