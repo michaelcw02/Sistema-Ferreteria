@@ -57,7 +57,7 @@ public class ConjuntoClientes {
         }
     }
     public void addCliente(Cliente client) throws Exception{
-        String query = "INSERT INTO EMPLEADO (Cedula, Nombre, Telefono, Email, Descuento)"
+        String query = "INSERT INTO EMPLEADO (Cedula, Nombre, Telefono, Email, Descuento) "
                     + "VALUES('%s', '%s', '%s', '%s', %d)";
         query = String.format(query, client.getCedula(), client.getNombre(), 
                 client.getTelefono(), client.getEmail(), client.getDescuento());
@@ -67,7 +67,7 @@ public class ConjuntoClientes {
         }
     }
     public void updateCliente(Cliente client) throws Exception{
-        String query = "UPDATE Empleado SET Nombre = '%s', Telefono = '%s', Email = '%b', Descuento = '%d'" + 
+        String query = "UPDATE Empleado SET Nombre = '%s', Telefono = '%s', Email = '%b', Descuento = '%d' " + 
                         "WHERE Cedula = '%s'";
         query = String.format(query, client.getNombre(), client.getTelefono(), client.getEmail(), 
                             client.getDescuento(), client.getCedula());

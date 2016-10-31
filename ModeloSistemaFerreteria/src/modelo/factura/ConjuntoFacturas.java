@@ -94,7 +94,7 @@ public class ConjuntoFacturas {
         
         Date fecha = getTimeFormat(fac.getFecha());
         
-        String query = "INSERT INTO Factura (Cliente, Vendedor, Fecha, isPagado, isDespachado)"
+        String query = "INSERT INTO Factura (Cliente, Vendedor, Fecha, isPagado, isDespachado) "
                     + "VALUES('%s', '%s', '%s', '%b', '%b')";
         query = String.format(query, fecha, fac.getCliente().getCedula(), fac.getVendedor().getIdEmpleado(), fac.isPagado(), fac.isDespachado());
         int result = dbc.executeUpdate(query);
@@ -108,8 +108,8 @@ public class ConjuntoFacturas {
         LinkedList<LineaDetalle> detalles = fac.getDetalles();
         String query;
         for(LineaDetalle detalle : detalles) {
-            query = "INSERT INTO LineaDetalle (Factura, Producto, Cantidad, Precio, isDespachado)" + 
-                       "VALUES ('%d', '%s', '%d', '%d', '%b')";
+            query = "INSERT INTO LineaDetalle (Factura, Producto, Cantidad, Precio, isDespachado) " + 
+                       "VALUES ('%d', '%s', '%d', '%f', '%b')";
             query = String.format(query, fac.getCodigo(), detalle.getProducto(), detalle.getCantidad(), detalle.getPrecio(), detalle.isDespachado());
             int result = dbc.executeUpdate(query);
         }        
@@ -119,7 +119,7 @@ public class ConjuntoFacturas {
         
         Date fecha = getTimeFormat(fac.getFecha());
         
-        String query = "UPDATE Inventario SET Cliente = '%s', Vendedor = '%d', Fecha = '%s', isPagado = '%b', isDespachado = '%b'" + 
+        String query = "UPDATE Inventario SET Cliente = '%s', Vendedor = '%d', Fecha = '%s', isPagado = '%b', isDespachado = '%b' " + 
                         "WHERE Codigo = '%d'";
         query = String.format(query, fac.getCliente(), fac.getVendedor(), fecha, fac.isPagado(), fac.isDespachado(), fac.getCodigo());
         int result = dbc.executeUpdate(query);
@@ -133,7 +133,7 @@ public class ConjuntoFacturas {
         LinkedList<LineaDetalle> detalles = fac.getDetalles();
         String query;
         for(LineaDetalle detalle : detalles) {
-            query = "UPDATE LineaDetalle SET Cantidad = '%d', Precio = '%d', isDespachado = '%b'" +
+            query = "UPDATE LineaDetalle SET Cantidad = '%d', Precio = '%f', isDespachado = '%b' " +
                     "WHERE Factura = '%d' AND Producto = '%s'";
             query = String.format(query, detalle.getCantidad(), detalle.getPrecio(), detalle.isDespachado(), fac.getCodigo(), detalle.getProducto());
             int result = dbc.executeUpdate(query);
