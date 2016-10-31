@@ -58,7 +58,7 @@ public class ConjuntoPagos {
     }
     public void addPago(Pago pag) throws Exception {
         String query = "INSERT INTO Producto (Factura, TipoPago, Pago)"
-                    + "VALUES('%d', '%d', '%d')";
+                    + "VALUES('%d', '%d', '%f')";
         query = String.format(query, pag.getFactura().getCodigo(), pag.getTipoPago(), pag.getPago());
         int result = dbc.executeUpdate(query);
         if(result != 0) {
@@ -86,7 +86,7 @@ public class ConjuntoPagos {
     }    
     
     public void updatePago(Pago pag) throws Exception{
-        String query = "UPDATE Pago SET TipoPago = '%d', Pago = '%d'" + 
+        String query = "UPDATE Pago SET TipoPago = '%d', Pago = '%f'" + 
                         "WHERE Factura = '%d'";
         query = String.format(query, pag.getTipoPago(), pag.getPago(), pag.getFactura());
         int result = dbc.executeUpdate(query);
@@ -95,7 +95,7 @@ public class ConjuntoPagos {
         }
     }
     public void updatePagoTarjeta(Pago pag) throws Exception {
-        String query = "UPDATE CounterTarjeta SET Numero = '%d'" + 
+        String query = "UPDATE CounterTarjeta SET Numero = '%d' " + 
                         "WHERE Factura = '%d'";
         query = String.format(query, pag.getCounterTarjeta());
         int result = dbc.executeUpdate(query);
@@ -103,7 +103,7 @@ public class ConjuntoPagos {
             throw new Exception("Pago existente.");
     } 
     public void updatePagoCheque(Pago pag) throws Exception {
-        String query = "UPDATE CounterCheque SET Numero = '%d'" + 
+        String query = "UPDATE CounterCheque SET Numero = '%d' " + 
                         "WHERE Factura = '%d'";
         query = String.format(query, pag.getCounterCheque());
         int result = dbc.executeUpdate(query);
