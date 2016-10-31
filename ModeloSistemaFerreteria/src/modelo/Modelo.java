@@ -6,12 +6,14 @@
 package modelo;
 
 import adaptadores.AdaptadorSubject;
+import interfaces.Observer;
 import modelo.cobros.ConjuntoPagos;
 import modelo.database.DataBaseConnection;
 import modelo.factura.ConjuntoFacturas;
 import modelo.inventarios.ConjuntoInventarios;
 import modelo.personas.clientes.ConjuntoClientes;
 import modelo.personas.empleados.ConjuntoEmpleados;
+import modelo.personas.empleados.Empleado;
 import modelo.productos.ConjuntoProductos;
 
 /**
@@ -21,6 +23,7 @@ import modelo.productos.ConjuntoProductos;
 public class Modelo {
     
     private Modelo() {
+        observers = new AdaptadorSubject();
         dbc = new DataBaseConnection();
         conjuntoProductos = new ConjuntoProductos(dbc);
         conjuntoEmpleados = new ConjuntoEmpleados(dbc);
@@ -28,13 +31,29 @@ public class Modelo {
         conjuntoInventarios = new ConjuntoInventarios(dbc);
         conjuntoFacturas = new ConjuntoFacturas(dbc);
         conjuntoPagos = new ConjuntoPagos(dbc);
+        emp = null;
     }
     static public Modelo getInstance() {
         if(instance == null)
             instance = new Modelo();
         return instance;
     }
+    public void agregar(Observer obs) {
+        observers.agregar(obs);
+    }
+    public void notificar() {
+        observers.notificar();
+    }
     
+    public Empleado verifyCredentials(String id, String pass) {
+        try {
+            emp = conjuntoEmpleados.getEmpleadoByIdAndPass(id, pass);
+            if(emp.isActivo())
+                return emp; 
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
     
     public static Modelo instance;
@@ -45,5 +64,6 @@ public class Modelo {
     ConjuntoClientes    conjuntoClientes;
     ConjuntoInventarios conjuntoInventarios;
     ConjuntoFacturas    conjuntoFacturas;
-    ConjuntoPagos       conjuntoPagos;  
+    ConjuntoPagos       conjuntoPagos;
+    Empleado emp;   //ESTO ES PARA PROPOSITOS DE TENER EXTRA SEGURIDAD.
 }

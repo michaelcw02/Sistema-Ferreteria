@@ -6,6 +6,8 @@
 package control;
 
 import Interfaz.*;
+import modelo.Modelo;
+import modelo.personas.empleados.Empleado;
 
 /**
  *
@@ -13,17 +15,42 @@ import Interfaz.*;
  */
 public class Control {
     
-    public Control() {        
+    public Control() {
+        modelo = Modelo.getInstance();
         login = new VentanaLogin(this);
+        menu  = new VentanaMenu(this);
+        //
+        setObservers();
+    }
+    private void setObservers() {
+        modelo.agregar(menu);
+        //this keeeps going down.
     }
     
     public void mostrarLogin() {
         login.show();
     }
-    public void login(String username, String password) {
-        
+    public void ocultarLogin() {
+        login.dispose();
+    }
+    public void mostrarMenu() {
+        menu.show();
+    }
+    public boolean login(String username, String password) {
+        Empleado emp = modelo.verifyCredentials(username, password);
+        if (emp != null) {
+            String name = emp.getNombre();
+            menu.updateBanner(name);
+            menu.limitarAccesos(emp);
+            ocultarLogin();
+            mostrarMenu();
+            return true;
+        }            
+        return false;
     }
     
-    
-    VentanaLogin login;
+    private Modelo modelo;
+    private VentanaLogin login;
+    private VentanaMenu  menu;
+
 }

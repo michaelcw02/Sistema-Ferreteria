@@ -6,8 +6,13 @@
 package Interfaz;
 
 import control.Control;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +25,7 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     public VentanaLogin(Control c) {
         ctrl = c;
+        setLocation();
         initComponents();
         setActions();
     }
@@ -27,22 +33,29 @@ public class VentanaLogin extends javax.swing.JFrame {
         String username = txtFieldUsername.getText();
         String password = passField.getText();
         if(!username.equalsIgnoreCase("") || !password.equalsIgnoreCase(""))
-            ctrl.login(username, password);
+            if(!ctrl.login(username, password))
+                JOptionPane.showMessageDialog(this, INCORRECT_CREDENTIALS, ERROR_TITLE, 0);
+    }
+    
+    private void setLocation() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
-    void setActions() {
-        
+    private void setActions() {
         passField.addKeyListener(new KeyAdapter() {
-            
             public void keyPressed(KeyEvent key) {
                 switch (key.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
-                        submit();       break;
+                        submit();   break;
                 }
             }
-            
+        });  
+        passField.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent fe) {
+                passField.setText("");
+            }
         });
-        
     }
     
     /**
@@ -67,16 +80,20 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Password:");
 
-        txtFieldUsername.setText("Jaimico");
+        txtFieldUsername.setText("SUPERUSER");
         txtFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFieldUsernameActionPerformed(evt);
             }
         });
 
-        passField.setText("password");
+        passField.setText("SUPER");
+        passField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFieldActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 102));
         jButton1.setText("LOGIN");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,19 +109,17 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFieldUsername))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtFieldUsername)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(17, 17, 17)
-                        .addComponent(passField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(87, 87, 87))
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,9 +132,9 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,8 +148,14 @@ public class VentanaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFieldUsernameActionPerformed
 
+    private void passFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passFieldActionPerformed
+
     
     Control ctrl;
+    String INCORRECT_CREDENTIALS = "Login credentials incorrect, please try again.";
+    String ERROR_TITLE = "Error";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
