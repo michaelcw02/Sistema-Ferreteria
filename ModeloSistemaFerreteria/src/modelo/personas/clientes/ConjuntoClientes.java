@@ -31,17 +31,6 @@ public class ConjuntoClientes {
             throw new Exception("Cliente inexistente.");
         }
     }
-    public Cliente getClienteByIdAndPass(String id, String pass) throws Exception{
-        String query = "SELECT * " + "FROM Cliente WHERE Cedula = '%s' AND Clave = '%s'";
-        query = String.format(query, id, pass);
-        ResultSet rs = dbc.executeQuery(query);
-        if(rs.next()) {
-            return cliente(rs);
-        }
-        else {
-            throw new Exception("Cliente inexistente.");
-        }
-    }
     public LinkedList<Cliente> searchClienteByName(String nombre) throws Exception{
         LinkedList<Cliente> listaResultado = new LinkedList<>();
         try {
