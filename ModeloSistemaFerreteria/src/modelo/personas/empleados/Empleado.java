@@ -14,7 +14,6 @@ public class Empleado {
     public Empleado() {
         idEmpleado = "";
         nombre = "";
-        apellido = "";
         clave = "";
         activo = false;
         vendedor = false;
@@ -24,10 +23,9 @@ public class Empleado {
         administrador = false;
     }
 
-    public Empleado(String idEmpleado, String nombre, String apellido, String clave) {
+    public Empleado(String idEmpleado, String nombre, String clave) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.clave = clave;
         activo = true;
         vendedor = false;
@@ -45,9 +43,6 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 
     public void setClave(String clave) {
         this.clave = clave;
@@ -77,9 +72,6 @@ public class Empleado {
     public String getNombre() {
         return nombre;
     }
-    public String getApellido() {
-        return apellido;
-    }
     public String getClave() {
         return clave;
     }
@@ -104,7 +96,6 @@ public class Empleado {
     
     String idEmpleado;
     String nombre;
-    String apellido;
     String clave;
     boolean activo;
     boolean vendedor;
