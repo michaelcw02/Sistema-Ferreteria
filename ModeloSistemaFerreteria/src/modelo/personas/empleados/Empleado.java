@@ -30,6 +30,11 @@ public class Empleado {
         this.apellido = apellido;
         this.clave = clave;
         activo = true;
+        vendedor = false;
+        cajero = false;
+        despachador = false;
+        bodeguero = false;
+        administrador = false;
     }
 
     public void setIdEmpleado(String idEmpleado) {
