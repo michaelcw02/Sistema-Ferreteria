@@ -6,6 +6,21 @@
 package Interfaz;
 
 import control.Control;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import modelo.personas.clientes.Cliente;
 
 /**
  *
@@ -18,7 +33,7 @@ public class VCatalogoClientes extends javax.swing.JFrame {
      */
     public VCatalogoClientes(Control c) {
         initComponents();
-        ctrl=c;        
+        ctrl = c;
     }
 
     /**
@@ -38,20 +53,25 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         Borrado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGap(0, 415, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 211, Short.MAX_VALUE)
         );
 
         Busqueda.setText("Búsqueda");
+        Busqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaActionPerformed(evt);
+            }
+        });
 
         Inclusion.setText("Inclusión");
 
@@ -81,7 +101,6 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Busqueda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -91,8 +110,9 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Modificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Borrado)))))
-                .addContainerGap())
+                                .addComponent(Borrado))
+                            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,22 +127,98 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                     .addComponent(Modificar)
                     .addComponent(Borrado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_ConsultaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-  
+    private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
+        String[] options = {"Opcion", "ID", "Nombre"};
+        JComboBox comboBox = new JComboBox(options);
+        JLabel label = new JLabel();
+        label.setText("Digite y seleccione la opción a buscar:");
+        label.setBounds(0, 20, 230, 30);
+        comboBox.setBounds(310, 20, 60, 30);
+        JTextField txt = new JTextField();
+        txt.setBounds(240, 20, 60, 30);
+        comboBox.addActionListener(new ActionListener() {
+            //new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox combo = (JComboBox) e.getSource();
+                String option = (String) combo.getSelectedItem();
+                //busca por cedula
+                if ("ID".equals(option)) {
+                    String texto = txt.getText();
+                    if (ctrl.searchClienteByID(texto) != null) {
+                        String nombre = ctrl.searchClienteByID(texto).getNombre();
+                        String email = ctrl.searchClienteByID(texto).getEmail();
+                        String telefono = ctrl.searchClienteByID(texto).getTelefono();
+                        String id = ctrl.searchClienteByID(texto).getCedula();
+                        String descuento = Integer.toString(ctrl.searchClienteByID(texto).getDescuento());
+                        JTextArea l = new JTextArea();
+                        l.setBounds(0, 70, 200, 200);
+                        l.setText("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
+                                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
+                                + '\n' + "MONTO DESCUENTO: " + descuento);
+                        Font font = new Font("Verdana", Font.PLAIN, 12);
+                        l.setFont(font);
+                        l.setEditable(false);
+                        l.setVisible(true);
+                        panel.add(l);
+                    } else {
+                        JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
+                    }
+                }
+                //busca por nombre
+                if("Nombre".equals(option)){
+                String texto = txt.getText();
+                    if (ctrl.searchClienteByName(texto) != null) {
+                        JTextArea l = new JTextArea();
+                       
+                        for(Cliente cliente:ctrl.searchClienteByName(texto)){
+                        String nombre = cliente.getNombre();
+                        String email = cliente.getEmail();
+                        String telefono = cliente.getTelefono();
+                        String id = cliente.getCedula();
+                        String descuento = Integer.toString(cliente.getDescuento());
+                         l.append("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
+                                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
+                                + '\n' + "MONTO DESCUENTO: " + descuento);
+                        }
+                        Font font = new Font("Verdana", Font.PLAIN, 12);
+                        l.setFont(font);
+                        l.setEditable(false);
+                        l.setVisible(true);
+                        JScrollPane scroll = new JScrollPane(l);  //no sirve 
+                        l.setBounds(0,70,200,200);
+                        scroll.setVisible(true);
+                        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                        panel.add(l); 
+                    }
+                    } else {
+                        JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
+                    }
+                
+                }
+            
+        }
+        );
+        panel.add(label);
+        panel.add(comboBox);
+        panel.add(txt);
+        panel.repaint();
+    }//GEN-LAST:event_BusquedaActionPerformed
+
     private Control ctrl;
+    String INCORRECT = "Cliente no encontrado en el sistema";
+    String ERROR = "Error";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Borrado;
     private javax.swing.JButton Busqueda;
