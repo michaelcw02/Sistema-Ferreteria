@@ -35,6 +35,17 @@ public class Factura {
         despachado = false;
     }
 
+    public Factura(Cliente cliente, Empleado vendedor, Date fecha) {
+        this.cliente = cliente;
+        this.vendedor = vendedor;
+        this.fecha = fecha;
+        codigo = -1;
+        detalles = new LinkedList<>();
+        pagado = false;
+        despachado = false;
+    }
+    
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
