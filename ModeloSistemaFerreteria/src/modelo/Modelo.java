@@ -131,6 +131,12 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+    public void deleteEmpleado(String id){
+        try {
+            conjuntoEmpleados.deleteEmpleado(id);
+        } catch (Exception ex) {
+        }
+    }
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;

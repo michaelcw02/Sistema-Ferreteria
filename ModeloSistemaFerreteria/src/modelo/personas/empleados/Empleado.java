@@ -23,7 +23,8 @@ public class Empleado {
         administrador = false;
     }
 
-    public Empleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+    public Empleado(String idEmpleado, String nombre, String clave,boolean activo, 
+            boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.clave = clave;
