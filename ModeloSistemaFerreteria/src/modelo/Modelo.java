@@ -81,7 +81,12 @@ public class Modelo {
         }
         return null;
     }
-
+    public Cliente createCliente(String cedula, String nombre, String telefono, String email, int descuento){
+    return new Cliente(cedula,nombre,telefono,email,descuento);
+    }
+    public void addCliente(Cliente cliente) throws Exception{
+    conjuntoClientes.addCliente(cliente);
+    }
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
