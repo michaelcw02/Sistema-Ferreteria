@@ -200,7 +200,6 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                     String texto = txt.getText();
                     if (ctrl.searchClienteByName(texto) != null) {
                         JTextArea l = new JTextArea();
-
                         for (Cliente cliente : ctrl.searchClienteByName(texto)) {
                             String nombre = cliente.getNombre();
                             String email = cliente.getEmail();
@@ -215,14 +214,18 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                         l.setFont(font);
                         l.setEditable(false);
                         l.setVisible(true);
-                        JScrollPane scroll = new JScrollPane(l);  //no sirve 
-                        l.setBounds(0, 70, 200, 200);
+                        l.setBounds(20, 70, 200, 30);
+                        comboBox.setBounds(20, 40, 60, 30);
+                        JScrollPane scroll = new JScrollPane(l);
+                        scroll.setBounds(20, 70, 200, 100);
                         scroll.setVisible(true);
                         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                        panel.add(l);
+                        panel.add(scroll);
+
                     }
-                } else {
-                    JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
+                    if (ctrl.searchClienteByName(texto) == null) {
+                        JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
+                    }
                 }
             }
         }
@@ -250,15 +253,29 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         insertar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (nom.getText().length() == 0 || em.getText().length() == 0
-                        || tel.getText().length() == 0 || ced.getText().length() == 0 || des.getText().length() == 0) {
-                    JOptionPane.showMessageDialog(insertar, "NO DEJE CASILLAS EN BLANCO", ADVICE, 0);
+                if (nom.getText().length() == 0 || ced.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(insertar, "CASILLA DE CEDULA/NOMBRE EN BLANCO", ADVICE, 0);
                 } else {
                     String nombre = nom.getText();
-                    String email = em.getText();
+                    String email;
+                    if (em.getText().length() == 0) {
+                        email = "";
+                    } else {
+                        email = em.getText();
+                    }
                     String cedula = ced.getText();
-                    String telefono = tel.getText();
-                    int descuento = Integer.parseInt(des.getText());
+                    String telefono;
+                    if (tel.getText().length() == 0) {
+                        telefono = "";
+                    } else {
+                        telefono = tel.getText();
+                    }
+                    int descuento;
+                    if (em.getText().length() == 0) {
+                        descuento = 0;
+                    } else {
+                        descuento = Integer.parseInt(des.getText());
+                    }
                     Cliente cliente = ctrl.createCLiente(cedula, nombre, telefono, email, descuento);
                     try {
                         ctrl.addCliente(cliente);
@@ -316,10 +333,10 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         JTextField tel = addTextField(80, 100, 100, 20);
         JTextField em = addTextField(60, 120, 100, 20);
         JTextField des = addTextField(120, 140, 60, 20);
-        JButton buscar=new JButton("Buscar");
-        buscar.setBounds(320,20,100,20);
-        JButton modificar=new JButton("Modificar");
-        modificar.setBounds(100,180,100,20);
+        JButton buscar = new JButton("Buscar");
+        buscar.setBounds(320, 20, 100, 20);
+        JButton modificar = new JButton("Modificar");
+        modificar.setBounds(100, 180, 100, 20);
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -328,7 +345,7 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                 } else {
                     String id = ced.getText();
                     try {
-                        Cliente c=ctrl.searchClienteByID(id);
+                        Cliente c = ctrl.searchClienteByID(id);
                         nom.setText(c.getNombre());
                         cedu.setText(c.getCedula());
                         tel.setText(c.getTelefono());
@@ -343,34 +360,33 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         modificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               String nombre=nom.getText();
-               String cedula=cedu.getText();
-               String telefono= tel.getText();
-               String email=em.getText();
-               int descuento=Integer.parseInt(des.getText());
+                String nombre = nom.getText();
+                String cedula = cedu.getText();
+                String telefono = tel.getText();
+                String email = em.getText();
+                int descuento = Integer.parseInt(des.getText());
                 try {
                     ctrl.updateCliente(ctrl.createCLiente(cedula, nombre, telefono, email, descuento));
                 } catch (Exception ex) {
                 }
             }
         });
-        
-        
-        
+
         panel.add(modificar);
         panel.add(buscar);
         panel.add(mod);
         panel.add(ced);
         panel.repaint();
     }//GEN-LAST:event_ModificarActionPerformed
-   // public Cliente addAction(JButton boton,JTextField ced){}
+    // public Cliente addAction(JButton boton,JTextField ced){}
+
     public JTextField addTextField(int x, int y, int m, int u) {
         JTextField nom = new JTextField();
         nom.setBounds(x, y, m, u);
         panel.add(nom);
         return nom;
     }
-    
+
     public void addLabels() {
         JLabel nom = new JLabel("NOMBRE: ");
         JLabel email = new JLabel("EMAIL: ");
@@ -388,8 +404,9 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         panel.add(email);
         panel.add(des);
     }
-    public void addLabels1(){
-       JLabel nom = new JLabel("NOMBRE: ");
+
+    public void addLabels1() {
+        JLabel nom = new JLabel("NOMBRE: ");
         JLabel email = new JLabel("EMAIL: ");
         JLabel tel = new JLabel("TELEFONO: ");
         JLabel cedula = new JLabel("CEDULA: ");
