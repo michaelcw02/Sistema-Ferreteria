@@ -91,6 +91,11 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         });
 
         Modificar.setText("Modificación");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         Borrado.setText("Borrado");
         Borrado.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +157,7 @@ public class VCatalogoClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_clearActionPerformed
 
     private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
+        panel.removeAll();
         String[] options = {"Opcion", "ID", "Nombre"};
         JComboBox comboBox = new JComboBox(options);
         JLabel label = new JLabel();
@@ -228,6 +234,7 @@ public class VCatalogoClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_BusquedaActionPerformed
 
     private void InclusionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InclusionActionPerformed
+        panel.removeAll();
         addLabels();
         JOptionPane.showMessageDialog(this, MENSSAGE, ADVICE, 1);
         JTextField nom = addTextField(60, 20, 60, 20);
@@ -262,12 +269,11 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                 }
             }
         });
-
         panel.repaint();
-
     }//GEN-LAST:event_InclusionActionPerformed
 
     private void BorradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorradoActionPerformed
+        panel.removeAll();
         JLabel borrar = new JLabel("Digite la cedula del cliente a borrar :");
         borrar.setBounds(100, 20, 260, 20);
         JTextField ced = new JTextField();
@@ -295,13 +301,76 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         panel.add(ced);
         panel.repaint();
     }//GEN-LAST:event_BorradoActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        panel.removeAll();
+        JLabel mod = new JLabel("Digite la cedula del cliente a modificar :");
+        mod.setBounds(0, 20, 260, 20);
+        JTextField ced = new JTextField();
+        ced.setBounds(220, 20, 100, 20);
+        addLabels1();
+        JTextField nom = addTextField(60, 60, 100, 20);
+        nom.setEditable(false);
+        JTextField cedu = addTextField(60, 80, 100, 20);
+        cedu.setEditable(false);
+        JTextField tel = addTextField(80, 100, 100, 20);
+        JTextField em = addTextField(60, 120, 100, 20);
+        JTextField des = addTextField(120, 140, 60, 20);
+        JButton buscar=new JButton("Buscar");
+        buscar.setBounds(320,20,100,20);
+        JButton modificar=new JButton("Modificar");
+        modificar.setBounds(100,180,100,20);
+        buscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ced.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(buscar, "LA CASILLA ESTA EN BLANCO", ADVICE, 0);
+                } else {
+                    String id = ced.getText();
+                    try {
+                        Cliente c=ctrl.searchClienteByID(id);
+                        nom.setText(c.getNombre());
+                        cedu.setText(c.getCedula());
+                        tel.setText(c.getTelefono());
+                        des.setText(Integer.toString(c.getDescuento()));
+                        em.setText(c.getEmail());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(buscar, "Cliente inexistente", ERROR, 0);
+                    }
+                }
+            }
+        });
+        modificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String nombre=nom.getText();
+               String cedula=cedu.getText();
+               String telefono= tel.getText();
+               String email=em.getText();
+               int descuento=Integer.parseInt(des.getText());
+                try {
+                    ctrl.updateCliente(ctrl.createCLiente(cedula, nombre, telefono, email, descuento));
+                } catch (Exception ex) {
+                }
+            }
+        });
+        
+        
+        
+        panel.add(modificar);
+        panel.add(buscar);
+        panel.add(mod);
+        panel.add(ced);
+        panel.repaint();
+    }//GEN-LAST:event_ModificarActionPerformed
+   // public Cliente addAction(JButton boton,JTextField ced){}
     public JTextField addTextField(int x, int y, int m, int u) {
         JTextField nom = new JTextField();
         nom.setBounds(x, y, m, u);
         panel.add(nom);
         return nom;
     }
-
+    
     public void addLabels() {
         JLabel nom = new JLabel("NOMBRE: ");
         JLabel email = new JLabel("EMAIL: ");
@@ -313,6 +382,23 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         tel.setBounds(0, 60, 80, 20);
         cedula.setBounds(0, 80, 60, 20);
         des.setBounds(0, 100, 140, 20);
+        panel.add(nom);
+        panel.add(tel);
+        panel.add(cedula);
+        panel.add(email);
+        panel.add(des);
+    }
+    public void addLabels1(){
+       JLabel nom = new JLabel("NOMBRE: ");
+        JLabel email = new JLabel("EMAIL: ");
+        JLabel tel = new JLabel("TELEFONO: ");
+        JLabel cedula = new JLabel("CEDULA: ");
+        JLabel des = new JLabel("MONTO DESCUENTO: ");
+        nom.setBounds(0, 60, 60, 20);
+        cedula.setBounds(0, 80, 60, 20);
+        tel.setBounds(0, 100, 100, 20);
+        email.setBounds(0, 120, 60, 20);
+        des.setBounds(0, 140, 140, 20);
         panel.add(nom);
         panel.add(tel);
         panel.add(cedula);

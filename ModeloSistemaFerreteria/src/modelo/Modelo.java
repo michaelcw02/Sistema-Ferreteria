@@ -93,6 +93,9 @@ public class Modelo {
     public void deleteClient(String id) throws Exception {
         conjuntoClientes.deleteCliente(id);
     }
+    public void updateClient(Cliente cliente) throws Exception{
+    conjuntoClientes.updateCliente(cliente);
+    }
     
     //PRODUCTOS.....
     public void addProducto(String cod, String desc, String unidad, double precio, boolean activo) {
@@ -110,10 +113,6 @@ public class Modelo {
             return false;
         }
     }
-    
-    
-    
-    
     
     public static Modelo instance;
     AdaptadorSubject observers;
