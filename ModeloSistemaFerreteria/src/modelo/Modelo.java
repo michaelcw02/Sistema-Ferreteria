@@ -23,7 +23,7 @@ import modelo.productos.ConjuntoProductos;
  * @author Michael Chen W.
  */
 public class Modelo {
-
+    
     private Modelo() {
         observers = new AdaptadorSubject();
         dbc = new DataBaseConnection();
@@ -35,22 +35,22 @@ public class Modelo {
         conjuntoPagos = new ConjuntoPagos(dbc);
         emp = null;
     }
-
+    
     static public Modelo getInstance() {
         if (instance == null) {
             instance = new Modelo();
         }
         return instance;
     }
-
+    
     public void agregar(Observer obs) {
         observers.agregar(obs);
     }
-
+    
     public void notificar() {
         observers.notificar();
     }
-
+    
     public Empleado verifyCredentials(String id, String pass) {
         try {
             emp = conjuntoEmpleados.getEmpleadoByIdAndPass(id, pass);
@@ -61,7 +61,7 @@ public class Modelo {
         }
         return null;
     }
-
+    
     public Cliente searchClientByID(String id) {
         Cliente cliente = new Cliente();
         try {
@@ -71,7 +71,7 @@ public class Modelo {
         }
         return null;
     }
-
+    
     public LinkedList<Cliente> searchClientByName(String name) {
         LinkedList<Cliente> listaResultado = new LinkedList<>();
         try {
@@ -81,11 +81,17 @@ public class Modelo {
         }
         return null;
     }
-    public Cliente createCliente(String cedula, String nombre, String telefono, String email, int descuento){
-    return new Cliente(cedula,nombre,telefono,email,descuento);
+
+    public Cliente createCliente(String cedula, String nombre, String telefono, String email, int descuento) {
+        return new Cliente(cedula, nombre, telefono, email, descuento);
     }
-    public void addCliente(Cliente cliente) throws Exception{
-    conjuntoClientes.addCliente(cliente);
+
+    public void addCliente(Cliente cliente) throws Exception {
+        conjuntoClientes.addCliente(cliente);
+    }
+
+    public void deleteClient(String id) throws Exception {
+        conjuntoClientes.deleteCliente(id);
     }
     public static Modelo instance;
     AdaptadorSubject observers;
