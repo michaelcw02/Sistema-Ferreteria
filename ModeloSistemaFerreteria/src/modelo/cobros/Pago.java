@@ -17,11 +17,11 @@ public class Pago {
         factura = null;
         tipoPago = 0;
         pago = 0.0;
-        counterTarjeta = null;
-        counterCheque = null;
+        counterTarjeta = -1;
+        counterCheque = -1;
     }
 
-    public Pago(Factura factura, int tipoPago, double pago, CounterTarjeta counterTarjeta, CounterCheque counterCheque) {
+    public Pago(Factura factura, int tipoPago, double pago, int counterTarjeta, int counterCheque) {
         this.factura = factura;
         this.tipoPago = tipoPago;
         this.pago = pago;
@@ -42,11 +42,11 @@ public class Pago {
     }
 
     public void setCounterTarjeta(int counter) {
-        counterTarjeta = new CounterTarjeta(counter);
+        counterTarjeta = counter;
     }
 
     public void setCounterCheque(int counter) {
-        counterCheque = new CounterCheque(counter);
+        counterCheque = counter;
     }
 
     public Factura getFactura() {
@@ -66,11 +66,11 @@ public class Pago {
     }
 
     public int getCounterTarjeta() {
-        return counterTarjeta.getNumero();
+        return counterTarjeta;
     }
 
     public int getCounterCheque() {
-        return counterCheque.getNumero();
+        return counterCheque;
     }
     
     
@@ -82,6 +82,6 @@ public class Pago {
     Factura factura;
     int tipoPago; //1: Efectivo, 2: Tarjeta, 3: Cheque.
     double pago;
-    CounterTarjeta counterTarjeta;
-    CounterCheque counterCheque;
+    int counterTarjeta;
+    int counterCheque;
 }
