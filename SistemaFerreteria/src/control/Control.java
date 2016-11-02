@@ -22,6 +22,7 @@ public class Control {
         login = new VentanaLogin(this);
         menu = new VentanaMenu(this);
         ventas = new VentanaVentas(this);
+        clientes = new VCatalogoClientes(this);
         //
         setObservers();
     }
@@ -62,7 +63,22 @@ public class Control {
     public LinkedList<Cliente> searchClienteByName(String name) {
         return modelo.searchClientByName(name);
     }
-    
+
+    public Cliente createCLiente(String cedula, String nombre, String telefono, String email, int descuento) {
+        return modelo.createCliente(cedula, nombre, telefono, email, descuento);
+    }
+
+    public void addCliente(Cliente cliente) throws Exception {
+        modelo.addCliente(cliente);
+    }
+
+    public void deleteCliente(String id) throws Exception {
+        modelo.deleteClient(id);
+    }
+
+    public void mostrarClientes() {
+        clientes.show();
+    }
 
     public void mostrarVentas() {
         ventas.show();
@@ -72,5 +88,5 @@ public class Control {
     private VentanaLogin login;
     private VentanaMenu menu;
     private VentanaVentas ventas;
-
+    private VCatalogoClientes clientes;
 }
