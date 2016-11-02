@@ -207,8 +207,7 @@ public class VentanaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        VCatalogoClientes view = new VCatalogoClientes(ctrl);
-        view.show();
+        ctrl.mostrarClientes();
     }//GEN-LAST:event_btnClientesActionPerformed
     
     

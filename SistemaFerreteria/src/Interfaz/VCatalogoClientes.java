@@ -13,6 +13,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,7 +51,7 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         Busqueda = new javax.swing.JButton();
         Inclusion = new javax.swing.JButton();
-        Consulta = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         Borrado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -74,11 +77,16 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         });
 
         Inclusion.setText("Inclusión");
-
-        Consulta.setText("Consulta");
-        Consulta.addActionListener(new java.awt.event.ActionListener() {
+        Inclusion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConsultaActionPerformed(evt);
+                InclusionActionPerformed(evt);
+            }
+        });
+
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
             }
         });
 
@@ -106,24 +114,24 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Inclusion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Consulta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Modificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Borrado))
+                                .addComponent(Borrado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clear))
                             .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Busqueda)
                     .addComponent(Inclusion)
-                    .addComponent(Consulta)
+                    .addComponent(clear)
                     .addComponent(Modificar)
                     .addComponent(Borrado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,10 +141,10 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaActionPerformed
-
-
-    }//GEN-LAST:event_ConsultaActionPerformed
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        panel.removeAll();
+        panel.repaint();
+    }//GEN-LAST:event_clearActionPerformed
 
     private void BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaActionPerformed
         String[] options = {"Opcion", "ID", "Nombre"};
@@ -148,7 +156,6 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         JTextField txt = new JTextField();
         txt.setBounds(240, 20, 60, 30);
         comboBox.addActionListener(new ActionListener() {
-            //new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox combo = (JComboBox) e.getSource();
@@ -172,42 +179,40 @@ public class VCatalogoClientes extends javax.swing.JFrame {
                         l.setEditable(false);
                         l.setVisible(true);
                         panel.add(l);
-                    } else {
+                    } if(ctrl.searchClienteByID(texto)== null) {
                         JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
                     }
                 }
                 //busca por nombre
-                if("Nombre".equals(option)){
-                String texto = txt.getText();
+                if ("Nombre".equals(option)) {
+                    String texto = txt.getText();
                     if (ctrl.searchClienteByName(texto) != null) {
                         JTextArea l = new JTextArea();
-                       
-                        for(Cliente cliente:ctrl.searchClienteByName(texto)){
-                        String nombre = cliente.getNombre();
-                        String email = cliente.getEmail();
-                        String telefono = cliente.getTelefono();
-                        String id = cliente.getCedula();
-                        String descuento = Integer.toString(cliente.getDescuento());
-                         l.append("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
-                                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
-                                + '\n' + "MONTO DESCUENTO: " + descuento);
+
+                        for (Cliente cliente : ctrl.searchClienteByName(texto)) {
+                            String nombre = cliente.getNombre();
+                            String email = cliente.getEmail();
+                            String telefono = cliente.getTelefono();
+                            String id = cliente.getCedula();
+                            String descuento = Integer.toString(cliente.getDescuento());
+                            l.append("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
+                                    + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
+                                    + '\n' + "MONTO DESCUENTO: " + descuento);
                         }
                         Font font = new Font("Verdana", Font.PLAIN, 12);
                         l.setFont(font);
                         l.setEditable(false);
                         l.setVisible(true);
                         JScrollPane scroll = new JScrollPane(l);  //no sirve 
-                        l.setBounds(0,70,200,200);
+                        l.setBounds(0, 70, 200, 200);
                         scroll.setVisible(true);
                         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                        panel.add(l); 
+                        panel.add(l);
                     }
-                    } else {
-                        JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
-                    }
-                
+                } else {
+                    JOptionPane.showMessageDialog(combo, INCORRECT, ERROR, 0);
                 }
-            
+            }
         }
         );
         panel.add(label);
@@ -216,15 +221,80 @@ public class VCatalogoClientes extends javax.swing.JFrame {
         panel.repaint();
     }//GEN-LAST:event_BusquedaActionPerformed
 
+    private void InclusionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InclusionActionPerformed
+        addLabels();
+        JOptionPane.showMessageDialog(this, MENSSAGE, ADVICE, 1);
+        JTextField nom = addTextField(60, 20, 60, 20);
+        JTextField ced = addTextField(60, 80, 60, 20);
+        JTextField tel = addTextField(80, 60, 80, 20);
+        JTextField em = addTextField(60, 40, 60, 20);
+        JTextField des = addTextField(120, 100, 40, 20);
+        JButton insertar = new JButton();
+        insertar.setBounds(20,140,100,20);
+        insertar.setVisible(true);
+        insertar.setText("Insertar");
+        panel.add(insertar);
+        insertar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (nom.getText().length() == 0 || em.getText().length() == 0
+                        || tel.getText().length() == 0 || ced.getText().length() == 0 || des.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(insertar, "NO DEJE CASILLAS EN BLANCO", ADVICE, 0);
+                } else {
+                    String nombre = nom.getText();
+                    String email = em.getText();
+                    String cedula = ced.getText();
+                    String telefono = tel.getText();
+                    int descuento = Integer.parseInt(des.getText());
+                    Cliente cliente= ctrl.createCLiente(cedula, nombre, telefono, email, descuento);
+                    try {
+                        ctrl.addCliente(cliente);
+                        JOptionPane.showMessageDialog(insertar, "Cliente insertado", ADVICE, 1);
+                    } catch (Exception ex) {
+                        
+                    }
+                }
+            }
+        });
+
+        panel.repaint();
+
+    }//GEN-LAST:event_InclusionActionPerformed
+    public JTextField addTextField(int x, int y, int m, int u) {
+        JTextField nom = new JTextField();
+        nom.setBounds(x, y, m, u);
+        panel.add(nom);
+        return nom;
+    }
+    public void addLabels() {
+        JLabel nom = new JLabel("NOMBRE: ");
+        JLabel email = new JLabel("EMAIL: ");
+        JLabel tel = new JLabel("TELEFONO: ");
+        JLabel cedula = new JLabel("CEDULA: ");
+        JLabel des = new JLabel("MONTO DESCUENTO: ");
+        nom.setBounds(0, 20, 60, 20);
+        email.setBounds(0, 40, 60, 20);
+        tel.setBounds(0, 60, 80, 20);
+        cedula.setBounds(0, 80, 60, 20);
+        des.setBounds(0, 100, 140, 20);
+        panel.add(nom);
+        panel.add(tel);
+        panel.add(cedula);
+        panel.add(email);
+        panel.add(des);
+    }
     private Control ctrl;
     String INCORRECT = "Cliente no encontrado en el sistema";
     String ERROR = "Error";
+    String MENSSAGE = "Digite en los siguientes espacios en blanco los datos del cliente, "
+            + "luego presione el boton de insetar";
+    String ADVICE = "Consejo";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Borrado;
     private javax.swing.JButton Busqueda;
-    private javax.swing.JButton Consulta;
     private javax.swing.JButton Inclusion;
     private javax.swing.JButton Modificar;
+    private javax.swing.JButton clear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
