@@ -114,7 +114,7 @@ public class ConjuntoInventarios {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
-    int toInt(boolean b) {
+    private int toInt(boolean b) {
         return Boolean.compare(b, false);
     }
     

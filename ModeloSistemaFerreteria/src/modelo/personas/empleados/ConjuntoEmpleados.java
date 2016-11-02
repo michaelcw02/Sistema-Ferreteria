@@ -99,7 +99,7 @@ public class ConjuntoEmpleados {
             return null;
         }
     }
-    int toInt(boolean b) {
+    private int toInt(boolean b) {
         return Boolean.compare(b, false);
     }
     

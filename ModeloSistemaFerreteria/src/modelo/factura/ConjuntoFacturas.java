@@ -7,7 +7,6 @@ package modelo.factura;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import modelo.database.DataBaseConnection;
@@ -65,12 +64,10 @@ public class ConjuntoFacturas {
     }
     public LinkedList<Factura> searchInventarioByDate(Date fecha) throws Exception{
         
-        fecha = getTimeFormat(fecha);
-        
         LinkedList<Factura> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * " + "FROM Factura WHERE Fecha like '%%%s%%'";
-            query = String.format(query, fecha);
+            query = String.format(query, dateToSQL(fecha));
             ResultSet rs = dbc.executeQuery(query);
             while (rs.next()) {
                 listaResultado.add(factura(rs));
@@ -89,11 +86,8 @@ public class ConjuntoFacturas {
     }
     public void addFactura(Factura fac) throws Exception{
         
-        Date fecha = getTimeFormat(fac.getFecha());
-        
-        String query = "INSERT INTO Factura (Cliente, Vendedor, Fecha, isPagado, isDespachado) "
-                    + "VALUES('%s', '%s', '%s', '%b', '%b')";
-        query = String.format(query, fecha, fac.getCliente().getCedula(), fac.getVendedor().getIdEmpleado(), fac.isPagado(), fac.isDespachado());
+        String query = "INSERT INTO `ferreteriadatos`.`factura` (`Cliente`, `Vendedor`, `Fecha`, `isPagado`, `isDespachado`) VALUES ('%s', '%s', '%s', '%d', '%d');";
+        query = String.format(query, fac.getCliente().getCedula(), fac.getVendedor().getIdEmpleado(), dateToSQL(fac.getFecha()), toInt(fac.isPagado()), toInt(fac.isDespachado()));
         int result = dbc.executeUpdate(query);
         if(result != 0)
             addDetalles(fac);
@@ -113,12 +107,9 @@ public class ConjuntoFacturas {
     }
     
     public void updateFactura(Factura fac) throws Exception{
-        
-        Date fecha = getTimeFormat(fac.getFecha());
-        
-        String query = "UPDATE Inventario SET Cliente = '%s', Vendedor = '%d', Fecha = '%s', isPagado = '%b', isDespachado = '%b' " + 
-                        "WHERE Codigo = '%d'";
-        query = String.format(query, fac.getCliente(), fac.getVendedor(), fecha, fac.isPagado(), fac.isDespachado(), fac.getCodigo());
+                       
+        String query = "UPDATE `ferreteriadatos`.`factura` SET `Cliente`='%s', `Vendedor`='%s', `Fecha`='%s', `isPagado`='%d', `isDespachado`='%d' WHERE `Codigo`='%d';";
+        query = String.format(query, fac.getCliente().getCedula(), fac.getVendedor().getIdEmpleado(), dateToSQL(fac.getFecha()), toInt(fac.isPagado()), toInt(fac.isDespachado()), fac.getCodigo());
         int result = dbc.executeUpdate(query);
         if(result != 0)
             updateDetalles(fac);
@@ -196,13 +187,12 @@ public class ConjuntoFacturas {
             return ld;        
     }
     
-    private Date getTimeFormat(Date fecha) {
-        try {
-        SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
-        return dt.parse(fecha.toString());        
-        } catch(Exception e) {
-            return new Date(1999, 12, 29, 00, 00, 00);
-        }
+    private String dateToSQL(Date date) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
+    private int toInt(boolean b) {
+        return Boolean.compare(b, false);
     }
     
     DataBaseConnection dbc;
