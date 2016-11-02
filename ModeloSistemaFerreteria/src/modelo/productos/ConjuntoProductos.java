@@ -20,6 +20,17 @@ public class ConjuntoProductos {
         this.dbc = dbc;
     }
 
+    public LinkedList<Producto> getAllProductos() {
+        LinkedList<Producto> listaResultado = new LinkedList<>();
+        try {
+        String query = "SELECT * " + "FROM Producto";
+        ResultSet rs = dbc.executeQuery(query);
+        while(rs.next())
+            listaResultado.add(producto(rs));
+        } catch (Exception e) {
+        }        
+        return listaResultado;
+    }
     
     public Producto getProductoByCod(String cod) throws Exception{
         String query = "SELECT * " + "FROM Producto WHERE Codigo = '%s'";

@@ -102,15 +102,26 @@ public class Modelo {
         Producto p = new Producto(cod, desc, unidad, precio, activo);
         try {
             conjuntoProductos.addProducto(p);
+            observers.notificar();
         } catch (Exception ex) {
         }
     }
-    public boolean verificarExistenciaProducto(String cod) {
+    public Producto getProducto(String cod) {
         try {
-            Producto p = conjuntoProductos.getProductoByCod(cod);
-            return true;
+            return conjuntoProductos.getProductoByCod(cod);
         } catch (Exception ex) {
-            return false;
+            return null;
+        }
+    }
+    public LinkedList<Producto> getAllProductos() {
+        return conjuntoProductos.getAllProductos();
+    }
+    public void updateProducto(String cod, String desc, String unidad, double precio, boolean activo) {
+        Producto p = new Producto(cod, desc, unidad, precio, activo);
+        try {
+            conjuntoProductos.updateProducto(p);
+            observers.notificar();
+        } catch (Exception ex) {
         }
     }
     
