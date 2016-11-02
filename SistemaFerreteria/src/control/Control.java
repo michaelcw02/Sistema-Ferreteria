@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import modelo.Modelo;
 import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
+import modelo.productos.Producto;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Control {
         menu = new VentanaMenu(this);
         ventas = new VentanaVentas(this);
         clientes = new VCatalogoClientes(this);
+        productos = new VCatalogoProductos(this);
         //
         setObservers();
     }
@@ -88,9 +90,20 @@ public class Control {
         ventas.show();
     }
     
+    public void mostrarProductos() {
+        productos.show();
+    }
+    public void addProducto(String codigo, String descripcion, String medida, double precio, boolean activo) {
+        modelo.addProducto(codigo, descripcion, medida, precio, activo);
+    }
+    public boolean verificarExistenciaProducto(String codigo) {
+        return modelo.verificarExistenciaProducto(codigo);
+    }
+
     private Modelo modelo;
     private VentanaLogin login;
     private VentanaMenu menu;
     private VentanaVentas ventas;
     private VCatalogoClientes clientes;
+    private VCatalogoProductos productos;
 }

@@ -8,15 +8,15 @@ package modelo;
 import adaptadores.AdaptadorSubject;
 import interfaces.Observer;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.cobros.ConjuntoPagos;
 import modelo.database.DataBaseConnection;
 import modelo.factura.ConjuntoFacturas;
 import modelo.inventarios.ConjuntoInventarios;
-import modelo.personas.clientes.Cliente;
-import modelo.personas.clientes.ConjuntoClientes;
-import modelo.personas.empleados.ConjuntoEmpleados;
-import modelo.personas.empleados.Empleado;
-import modelo.productos.ConjuntoProductos;
+import modelo.personas.clientes.*;
+import modelo.personas.empleados.*;
+import modelo.productos.*;
 
 /**
  *
@@ -93,10 +93,27 @@ public class Modelo {
     public void deleteClient(String id) throws Exception {
         conjuntoClientes.deleteCliente(id);
     }
-    
     public void updateClient(Cliente cliente) throws Exception{
     conjuntoClientes.updateCliente(cliente);
     }
+    
+    //PRODUCTOS.....
+    public void addProducto(String cod, String desc, String unidad, double precio, boolean activo) {
+        Producto p = new Producto(cod, desc, unidad, precio, activo);
+        try {
+            conjuntoProductos.addProducto(p);
+        } catch (Exception ex) {
+        }
+    }
+    public boolean verificarExistenciaProducto(String cod) {
+        try {
+            Producto p = conjuntoProductos.getProductoByCod(cod);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
