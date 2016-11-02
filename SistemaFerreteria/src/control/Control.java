@@ -6,7 +6,9 @@
 package control;
 
 import Interfaz.*;
+import java.util.LinkedList;
 import modelo.Modelo;
+import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
 
 /**
@@ -14,28 +16,32 @@ import modelo.personas.empleados.Empleado;
  * @author Michael Chen W.
  */
 public class Control {
-    
+
     public Control() {
         modelo = Modelo.getInstance();
         login = new VentanaLogin(this);
-        menu  = new VentanaMenu(this);
+        menu = new VentanaMenu(this);
         ventas = new VentanaVentas(this);
         //
         setObservers();
     }
+
     private void setObservers() {
         //this keeeps going down.
     }
-    
+
     public void mostrarLogin() {
         login.show();
     }
+
     public void ocultarLogin() {
         login.dispose();
     }
+
     public void mostrarMenu() {
         menu.show();
     }
+
     public boolean login(String username, String password) {
         Empleado emp = modelo.verifyCredentials(username, password);
         if (emp != null) {
@@ -45,21 +51,26 @@ public class Control {
             ocultarLogin();
             mostrarMenu();
             return true;
-        }            
+        }
         return false;
     }
+
+    public Cliente searchClienteByID(String id) {
+        return modelo.searchClientByID(id);
+    }
+
+    public LinkedList<Cliente> searchClienteByName(String name) {
+        return modelo.searchClientByName(name);
+    }
     
-    
+
     public void mostrarVentas() {
         ventas.show();
     }
-    
-    
-    
-    
+
     private Modelo modelo;
     private VentanaLogin login;
-    private VentanaMenu  menu;
+    private VentanaMenu menu;
     private VentanaVentas ventas;
 
 }

@@ -32,7 +32,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -159,6 +159,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mantenimiento Clientes"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

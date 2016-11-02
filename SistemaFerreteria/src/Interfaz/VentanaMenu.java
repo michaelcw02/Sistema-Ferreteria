@@ -96,7 +96,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         banner.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -125,6 +125,11 @@ public class VentanaMenu extends javax.swing.JFrame {
         btnDespacho.setText("Despacho");
 
         btnClientes.setText("Mantenimiento Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -200,6 +205,11 @@ public class VentanaMenu extends javax.swing.JFrame {
         this.dispose();
         ctrl.mostrarVentas();
     }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        VCatalogoClientes view = new VCatalogoClientes(ctrl);
+        view.show();
+    }//GEN-LAST:event_btnClientesActionPerformed
     
     
     private Control ctrl;
