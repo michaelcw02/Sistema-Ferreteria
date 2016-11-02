@@ -26,7 +26,7 @@ public class ConjuntoFacturas {
     
     
     public Factura getFacturaByCod(int codigo) throws Exception{
-        String query = "SELECT * " + "FROM Cliente WHERE Codigo = '%d'";
+        String query = "SELECT * " + "FROM Factura WHERE Codigo = '%d'";
         query = String.format(query, codigo);
         ResultSet rs = dbc.executeQuery(query);
         if(rs.next()) {
@@ -36,7 +36,7 @@ public class ConjuntoFacturas {
             throw new Exception("Factura inexistente.");
         }
     }
-    public LinkedList<Factura> searchFacturaByCliente(String ced) throws Exception{
+    public LinkedList<Factura> searchFacturaByCliente(String ced) {
         LinkedList<Factura> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * " + "FROM Factura WHERE Cliente like '%%%s%%'";
@@ -45,11 +45,11 @@ public class ConjuntoFacturas {
             while (rs.next()) {
                 listaResultado.add(factura(rs));
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
         }
         return listaResultado;
     }
-    public LinkedList<Factura> searchFacturaByVendedor(String idEmp) throws Exception{
+    public LinkedList<Factura> searchFacturaByVendedor(String idEmp) {
         LinkedList<Factura> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * " + "FROM Factura WHERE Vendedor like '%%%s%%'";
@@ -58,11 +58,11 @@ public class ConjuntoFacturas {
             while (rs.next()) {
                 listaResultado.add(factura(rs));
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
         }
         return listaResultado;
     }
-    public LinkedList<Factura> searchInventarioByDate(Date fecha) throws Exception{
+    public LinkedList<Factura> searchInventarioByDate(Date fecha) {
         
         LinkedList<Factura> listaResultado = new LinkedList<>();
         try {
@@ -72,7 +72,7 @@ public class ConjuntoFacturas {
             while (rs.next()) {
                 listaResultado.add(factura(rs));
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
         }
         return listaResultado;
     }
@@ -95,14 +95,15 @@ public class ConjuntoFacturas {
             throw new Exception("Factura existente.");
     }
     
-    public void addDetalles(Factura fac) {
+    public void addDetalles(Factura fac)  throws Exception{
         LinkedList<LineaDetalle> detalles = fac.getDetalles();
         String query;
         for(LineaDetalle detalle : detalles) {
-            query = "INSERT INTO LineaDetalle (Factura, Producto, Cantidad, Precio, isDespachado) " + 
-                       "VALUES ('%d', '%s', '%d', '%f', '%b')";
-            query = String.format(query, fac.getCodigo(), detalle.getProducto(), detalle.getCantidad(), detalle.getPrecio(), detalle.isDespachado());
+            query = "INSERT INTO `ferreteriadatos`.`lineadetalle` (`Factura`, `Producto`, `Cantidad`, `Precio`, `isDespachado`) VALUES ('%d', '%s', '%d', '%f', '%d');";
+            query = String.format(query, fac.getCodigo(), detalle.getProducto().getCodigo(), detalle.getCantidad(), detalle.getPrecio(), toInt(detalle.isDespachado()));
             int result = dbc.executeUpdate(query);
+            if (result == 0)
+                throw new Exception("No se pudo agregar el detalle..");
         }        
     }
     
@@ -121,9 +122,8 @@ public class ConjuntoFacturas {
         LinkedList<LineaDetalle> detalles = fac.getDetalles();
         String query;
         for(LineaDetalle detalle : detalles) {
-            query = "UPDATE LineaDetalle SET Cantidad = '%d', Precio = '%f', isDespachado = '%b' " +
-                    "WHERE Factura = '%d' AND Producto = '%s'";
-            query = String.format(query, detalle.getCantidad(), detalle.getPrecio(), detalle.isDespachado(), fac.getCodigo(), detalle.getProducto());
+            query = "UPDATE `ferreteriadatos`.`lineadetalle` SET `Cantidad`='%d', `Precio`='%f', `isDespachado`='%d' WHERE `Factura`='%d' and`Producto`='%s';";
+            query = String.format(query, detalle.getCantidad(), detalle.getPrecio(), toInt(detalle.isDespachado()), fac.getCodigo(), detalle.getProducto().getCodigo());
             int result = dbc.executeUpdate(query);
         }
     }
