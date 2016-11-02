@@ -16,6 +16,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -58,6 +60,11 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         }
         });
         addDocumentListener(txtFieldCod2, table1);
+        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                tableAction();
+            }
+        });
     }
     private void addDocumentListener(javax.swing.JTextField txtField, javax.swing.JTable table) {
         
@@ -145,6 +152,28 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         ctrl.mostrarMenu();
     }
     
+    private void tableAction() {
+        int row = table1.getSelectedRow();
+        int column = 0;
+        
+        String value = table1.getModel().getValueAt(row, column++).toString();
+        txtFieldCodi.setText(value);
+        value = table1.getModel().getValueAt(row, column++).toString();
+        txtFieldDesc2.setText(value);
+
+        value = table1.getModel().getValueAt(row, column++).toString();
+        txtFieldUM2.setText(value);
+
+        value = table1.getModel().getValueAt(row, column++).toString();
+        txtFieldPrecio2.setText(value);
+
+        value = table1.getModel().getValueAt(row, column++).toString();
+        if(value == "true")
+            btnTrue2.setSelected(true);
+
+        else
+            btnFalse2.setSelected(true);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -365,6 +394,11 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             }
         });
         table1.getTableHeader().setReorderingAllowed(false);
+        table1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                table1FocusGained(evt);
+            }
+        });
         table1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table1MouseClicked(evt);
@@ -594,26 +628,6 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_txtFieldCod2FocusGained
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
-        int row = table1.getSelectedRow();
-        int column = 0;
-        
-        String value = table1.getModel().getValueAt(row, column++).toString();
-        txtFieldCodi.setText(value);
-        value = table1.getModel().getValueAt(row, column++).toString();
-        txtFieldDesc2.setText(value);
-
-        value = table1.getModel().getValueAt(row, column++).toString();
-        txtFieldUM2.setText(value);
-
-        value = table1.getModel().getValueAt(row, column++).toString();
-        txtFieldPrecio2.setText(value);
-
-        value = table1.getModel().getValueAt(row, column++).toString();
-        if(value == "true")
-            btnTrue2.setSelected(true);
-
-        else
-            btnFalse2.setSelected(true);
         
     }//GEN-LAST:event_table1MouseClicked
 
@@ -641,6 +655,10 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         }
         
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void table1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_table1FocusGained
+        
+    }//GEN-LAST:event_table1FocusGained
 
     private Control ctrl;
     static private final String MODIFICACION = "Modificacion de productos";
