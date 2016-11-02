@@ -38,12 +38,12 @@ public class VentanaLogin extends javax.swing.JFrame {
     }
     
     private void setLocation() {
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        setLocationRelativeTo(null);
     }
 
     private void setActions() {
         passField.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent key) {
                 switch (key.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
@@ -52,6 +52,7 @@ public class VentanaLogin extends javax.swing.JFrame {
             }
         });  
         passField.addFocusListener(new FocusAdapter() {
+            @Override
             public void focusGained(FocusEvent fe) {
                 passField.setText("");
             }
