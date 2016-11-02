@@ -65,21 +65,17 @@ public class ConjuntoEmpleados {
         }
     }
     public void addEmpleado(Empleado emp) throws Exception{
-        String query = "INSERT INTO Empleado (ID_EMPLEADO, Nombre, Clave, isActivo, isAdministrador, isBodeguero, isCajero, isDespachador, isVendedor) "
-                    + "VALUES('%s', '%s','%s','%b','%b','%b','%b','%b')";
-        query = String.format(query, emp.getIdEmpleado(), emp.getNombre(), emp.getClave(), emp.isActivo(), emp.isAdministrador(), 
-                                    emp.isBodeguero(), emp.isCajero(), emp.isDespachador(), emp.isVendedor());
+        String query = "INSERT INTO `ferreteriadatos`.`empleado` (`ID_EMPLEADO`, `Nombre`, `Clave`, `isActivo`, `isAdministrador`, `isCajero`, `isVendedor`, `isDespachador`, `isBodeguero`) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d');";
+        query = String.format(query, emp.getIdEmpleado(), emp.getNombre(), emp.getClave(), toInt(emp.isActivo()), toInt(emp.isAdministrador()), toInt(emp.isBodeguero()), toInt(emp.isCajero()), toInt(emp.isDespachador()), toInt(emp.isVendedor()));
+        System.out.println(query);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Empleado existente.");
         }
     }
     public void updateEmpleado(Empleado emp) throws Exception{
-        String query = "UPDATE Empleado SET Nombre = '%s', Clave = '%s', isActivo = '%b', isAdministrador = '%b', " + 
-                        "isBodeguero = '%b', isCajero = '%b', isDespachador = '%b', isVendedor = '%b' " + 
-                        "WHERE ID_EMPLEADO = '%s'";
-        query = String.format(query, emp.getNombre(), emp.getClave(), emp.isActivo(), emp.isAdministrador(), emp.isBodeguero(), 
-                                    emp.isCajero(), emp.isDespachador(), emp.isVendedor(), emp.getIdEmpleado());
+        String query = "UPDATE `ferreteriadatos`.`empleado` SET `Nombre`='%s', `Clave`='%s', `isActivo`='%d', `isAdministrador`='%d', `isCajero`='%d', `isVendedor`='%d', `isDespachador`='%d', `isBodeguero`='%d' WHERE `ID_EMPLEADO`='%s';";
+        query = String.format(query, emp.getNombre(), emp.getClave(), toInt(emp.isActivo()), toInt(emp.isAdministrador()), toInt(emp.isBodeguero()), toInt(emp.isCajero()), toInt(emp.isDespachador()), toInt(emp.isVendedor()), emp.getIdEmpleado());
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Empleado inexistente.");
@@ -103,6 +99,10 @@ public class ConjuntoEmpleados {
             return null;
         }
     }
-        
+    int toInt(boolean b) {
+        return Boolean.compare(b, false);
+    }
+    
+    
     DataBaseConnection dbc;
 }
