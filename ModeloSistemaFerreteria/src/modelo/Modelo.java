@@ -93,6 +93,10 @@ public class Modelo {
     public void deleteClient(String id) throws Exception {
         conjuntoClientes.deleteCliente(id);
     }
+    
+    public void updateClient(Cliente cliente) throws Exception{
+    conjuntoClientes.updateCliente(cliente);
+    }
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
