@@ -7,7 +7,6 @@ package modelo.inventarios;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import modelo.database.DataBaseConnection;
@@ -24,12 +23,10 @@ public class ConjuntoInventarios {
         this.dbc = dbc;
     }
     
-    public Inventario getInventario(String codigo, Date fecha) throws Exception{
+    public Inventario getInventario(Date date, String codigo) throws Exception{
         
-        fecha = getTimeFormat(fecha);
-        
-        String query = "SELECT * " + "FROM Cliente WHERE Cedula = '%s' AND Fecha = '%s'";
-        query = String.format(query, codigo, fecha);
+        String query = "SELECT * " + "FROM Inventario WHERE Fecha = '%s'  AND Producto = '%s';";
+        query = String.format(query, dateToSQL(date), codigo);
         ResultSet rs = dbc.executeQuery(query);
         if(rs.next()) {
             return inventario(rs);
@@ -51,14 +48,12 @@ public class ConjuntoInventarios {
         }
         return listaResultado;
     }
-    public LinkedList<Inventario> searchInventarioByDate(Date fecha) throws Exception{
-        
-        fecha = getTimeFormat(fecha);
+    public LinkedList<Inventario> searchInventarioByDate(Date date) throws Exception{
         
         LinkedList<Inventario> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * " + "FROM Inventario WHERE Nombre like '%%%s%%'";
-            query = String.format(query, fecha);
+            query = String.format(query, dateToSQL(date));
             ResultSet rs = dbc.executeQuery(query);
             while (rs.next()) {
                 listaResultado.add(inventario(rs));
@@ -67,35 +62,29 @@ public class ConjuntoInventarios {
         }
         return listaResultado;
     }
-    public void deleteInventario(String id) throws Exception{
-        String query = "DELETE FROM Inventario WHERE Cedula = '%s'";
-        query = String.format(query, id);
+    public void deleteInventario(String idProducto) throws Exception{
+        String query = "DELETE FROM Inventario WHERE Producto = '%s'";
+        query = String.format(query, idProducto);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Inventario inexistente.");
         }
     }
     public void addInventario(Inventario inv) throws Exception{
-        
-        Date fecha = getTimeFormat(inv.getFecha());
-        
-        String query = "INSERT INTO Inventario (Fecha, Producto, Cantidad, isActivo)"
-                    + "VALUES('%s', '%s', '%d', '%b')";
-        query = String.format(query, fecha, inv.getProducto(), inv.getCantidad(), inv.isActivo());
+              
+        String query = "INSERT INTO `ferreteriadatos`.`inventario` (`Fecha`, `Producto`, `Cantidad`, `isActivo`) VALUES ('%s', '%s', '%d', '%d');";
+        query = String.format(query, dateToSQL(inv.getFecha()), inv.getProducto().getCodigo(), inv.getCantidad(), toInt(inv.isActivo()));
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Inventario existente.");
         }
         
     }
-    public void updateCliente(Inventario inv) throws Exception{
+    public void updateInventario(Inventario inv) throws Exception{
         
-        Date fecha = getTimeFormat(inv.getFecha());
-        
-        String query = "UPDATE Inventario SET Cantidad = '%d', isActivo = '%b'" + 
-                        "WHERE Fecha = '%s' AND Producto = '%s'";
-        query = String.format(query, inv.getCantidad(), inv.isActivo(),
-                        fecha, inv.getProducto());
+        String query = "UPDATE `ferreteriadatos`.`inventario` SET `Cantidad`='%d', `isActivo`='%d' WHERE `Fecha`='%s' and`Producto`='%s';";
+        query = String.format(query, inv.getCantidad(), toInt(inv.isActivo()), dateToSQL(inv.getFecha()), inv.getProducto().getCodigo());
+        System.out.println(query);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Inventario inexistente.");
@@ -121,13 +110,12 @@ public class ConjuntoInventarios {
         return cp.getProductoByCod(cod);
     }
     
-    private Date getTimeFormat(Date fecha) {
-        try {
-        SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy");
-        return dt.parse(fecha.toString());        
-        } catch(Exception e) {
-            return new Date(1999, 12, 29);
-        }
+    private String dateToSQL(Date date) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
+    int toInt(boolean b) {
+        return Boolean.compare(b, false);
     }
     
     DataBaseConnection dbc;

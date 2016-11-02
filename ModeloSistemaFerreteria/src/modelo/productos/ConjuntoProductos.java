@@ -54,20 +54,16 @@ public class ConjuntoProductos {
         }
     }
     public void addProducto(Producto product) throws Exception{
-        String query = "INSERT INTO Producto (Codigo, Descripcion, UnidadMedida, Precio, isActivo)"
-                    + "VALUES('%s', '%s', '%s', '%f', %b)";
-        query = String.format(query, product.getCodigo(), product.getDescripcion(), 
-                product.getUnidadMedida(), product.getPrecio(), product.isActivo());
+        String query = "INSERT INTO `ferreteriadatos`.`producto` (`Codigo`, `Descripcion`, `UnidadMedida`, `Precio`, `isActivo`) VALUES ('%s', '%s', '%s', '%f', '%d');";
+        query = String.format(query, product.getCodigo(), product.getDescripcion(), product.getUnidadMedida(), product.getPrecio(), toInt(product.isActivo()));
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Producto existente.");
         }
     }
     public void updateProducto(Producto product) throws Exception{
-        String query = "UPDATE Producto SET Descripcion = '%s', UnidadMedida = '%s', Precio= '%f', isActivo = '%b' " + 
-                        "WHERE Codigo = '%s'";
-        query = String.format(query, product.getDescripcion(), product.getUnidadMedida(), product.getPrecio(), 
-                            product.isActivo(), product.getCodigo());
+        String query = "UPDATE `ferreteriadatos`.`producto` SET `Descripcion`='%s', `UnidadMedida`='%s', `Precio`='%f', `isActivo`='%d' WHERE `Codigo`='%s';";
+        query = String.format(query, product.getDescripcion(), product.getUnidadMedida(), product.getPrecio(), toInt(product.isActivo()), product.getCodigo());
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Producto inexistente.");
@@ -86,6 +82,9 @@ public class ConjuntoProductos {
         } catch (SQLException ex) {
             return null;
         }
+    }
+    int toInt(Boolean b) {
+        return Boolean.compare(b, false);
     }
     
     DataBaseConnection dbc;

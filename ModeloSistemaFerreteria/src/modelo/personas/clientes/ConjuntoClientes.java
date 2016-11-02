@@ -31,6 +31,7 @@ public class ConjuntoClientes {
             throw new Exception("Cliente inexistente.");
         }
     }
+    
     public LinkedList<Cliente> searchClienteByName(String nombre) throws Exception{
         LinkedList<Cliente> listaResultado = new LinkedList<>();
         try {
@@ -45,7 +46,7 @@ public class ConjuntoClientes {
         return listaResultado;
     }
     public void deleteCliente(String id) throws Exception{
-        String query = "DELETE FROM Cliente WHERE Cedula = '%s'";
+        String query = "DELETE FROM `ferreteriadatos`.`cliente` WHERE `Cedula`='%s';";
         query = String.format(query, id);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
@@ -53,20 +54,20 @@ public class ConjuntoClientes {
         }
     }
     public void addCliente(Cliente client) throws Exception{
-        String query = "INSERT INTO EMPLEADO (Cedula, Nombre, Telefono, Email, Descuento) "
-                    + "VALUES('%s', '%s', '%s', '%s', %d)";
+        String query = "INSERT INTO `ferreteriadatos`.`cliente` (`Cedula`, `Nombre`, `Telefono`, `Email`, `Descuento`) VALUES ('%s', '%s', '%s', '%s', '%d');";
         query = String.format(query, client.getCedula(), client.getNombre(), 
                 client.getTelefono(), client.getEmail(), client.getDescuento());
+        System.out.println(query);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Cliente existente.");
         }
     }
     public void updateCliente(Cliente client) throws Exception{
-        String query = "UPDATE Empleado SET Nombre = '%s', Telefono = '%s', Email = '%b', Descuento = '%d' " + 
-                        "WHERE Cedula = '%s'";
+        String query = "UPDATE `ferreteriadatos`.`cliente` SET `Nombre`='%s', `Telefono`='%s', `Email`='%s', `Descuento`='%d' WHERE `Cedula`='%s';";
         query = String.format(query, client.getNombre(), client.getTelefono(), client.getEmail(), 
                             client.getDescuento(), client.getCedula());
+        System.out.println(query);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Cliente inexistente.");
