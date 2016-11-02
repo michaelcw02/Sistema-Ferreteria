@@ -30,6 +30,7 @@ public class Control {
     }
     
     private void setObservers() {
+        modelo.agregar(productos);
         //this keeeps going down.
     }
     
@@ -97,9 +98,21 @@ public class Control {
         modelo.addProducto(codigo, descripcion, medida, precio, activo);
     }
     public boolean verificarExistenciaProducto(String codigo) {
-        return modelo.verificarExistenciaProducto(codigo);
+        return (modelo.getProducto(codigo) != null) ? true : false;
     }
-
+    public LinkedList<Producto> getAllProductos() {
+        return modelo.getAllProductos();
+    }
+    public void modificarProducto(String cod, String des, String med, double precio, boolean activo) {
+        modelo.updateProducto(cod, des, med, precio, activo);
+    }
+    
+    
+    
+    
+    
+    
+    
     private Modelo modelo;
     private VentanaLogin login;
     private VentanaMenu menu;
