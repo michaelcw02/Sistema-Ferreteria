@@ -64,7 +64,7 @@ public class ConjuntoClientes {
         }
     }
     public void updateCliente(Cliente client) throws Exception{
-        String query = "UPDATE `ferreteriadatos`.`cliente` SET `Nombre`='%s', `Telefono`='%s', `Email`='%s', `Descuento`='%d' WHERE `Cedula`='%s';";
+      String query = "UPDATE `ferreteriadatos`.`cliente` SET `Nombre`='%s', `Telefono`='%s', `Email`='%s', `Descuento`='%d' WHERE `Cedula`='%s';";
         query = String.format(query, client.getNombre(), client.getTelefono(), client.getEmail(), 
                             client.getDescuento(), client.getCedula());
         System.out.println(query);
