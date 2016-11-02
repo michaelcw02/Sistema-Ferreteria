@@ -63,7 +63,5 @@ public class DataBaseConnection {
         return null;
     }
     
-    
-    public static final String PROPERTIES_FILE_NAME="/ferreteria.properties";        
     Connection cnx;
 }
