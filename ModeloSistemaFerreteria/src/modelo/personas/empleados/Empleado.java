@@ -23,16 +23,16 @@ public class Empleado {
         administrador = false;
     }
 
-    public Empleado(String idEmpleado, String nombre, String clave) {
+    public Empleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.clave = clave;
-        activo = true;
-        vendedor = false;
-        cajero = false;
-        despachador = false;
-        bodeguero = false;
-        administrador = false;
+        this.activo = activo;
+        this.vendedor = vendedor;
+        this.cajero = cajero;
+        this.despachador = despachador;
+        this.bodeguero = bodeguero;
+        this.administrador = administrador;
     }
 
     public void setIdEmpleado(String idEmpleado) {
