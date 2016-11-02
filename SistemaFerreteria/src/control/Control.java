@@ -7,6 +7,8 @@ package control;
 
 import Interfaz.*;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Modelo;
 import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
@@ -25,6 +27,8 @@ public class Control {
         ventas = new VentanaVentas(this);
         clientes = new VCatalogoClientes(this);
         productos = new VCatalogoProductos(this);
+        empleados = new VMantListaEmple(this);
+
         //
         setObservers();
     }
@@ -78,7 +82,7 @@ public class Control {
     public void deleteCliente(String id) throws Exception {
         modelo.deleteClient(id);
     }
-
+    
     public void updateCliente(Cliente cliente) throws Exception {
         modelo.updateClient(cliente);
     }
@@ -91,14 +95,35 @@ public class Control {
         ventas.show();
     }
     
+    public void mostrarVEmpleados() {
+        empleados.show();
+    }
+    
     public void mostrarProductos() {
         productos.show();
     }
+    
     public void addProducto(String codigo, String descripcion, String medida, double precio, boolean activo) {
         modelo.addProducto(codigo, descripcion, medida, precio, activo);
     }
+    
     public boolean verificarExistenciaProducto(String codigo) {
         return (modelo.getProducto(codigo) != null) ? true : false;
+    }
+    
+    public boolean verificarExistenciaEmpleado(String emp) {
+        return modelo.verificarExistenciaEmpleado(emp);
+    }
+    
+    public void addEmpleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+        modelo.addEmpleado(idEmpleado, nombre, clave, activo, vendedor, cajero, despachador, bodeguero, administrador);
+    }
+
+    public void deleteEmpleado(String id) {
+        try {
+            modelo.deleteEmpleado(id);
+        } catch (Exception ex) {
+        }
     }
     public LinkedList<Producto> getAllProductos() {
         return modelo.getAllProductos();
@@ -119,4 +144,5 @@ public class Control {
     private VentanaVentas ventas;
     private VCatalogoClientes clientes;
     private VCatalogoProductos productos;
+    private VMantListaEmple empleados;
 }

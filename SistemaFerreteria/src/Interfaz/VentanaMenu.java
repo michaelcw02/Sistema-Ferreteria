@@ -119,6 +119,11 @@ public class VentanaMenu extends javax.swing.JFrame {
         btnCobros.setText("Cobros");
 
         btnEmpleados.setText("Mantenimiento Empleados");
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpleadosActionPerformed(evt);
+            }
+        });
 
         btnVentas.setText("Ventas");
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +224,10 @@ public class VentanaMenu extends javax.swing.JFrame {
         this.dispose();
         ctrl.mostrarProductos();
     }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        ctrl.mostrarVEmpleados();
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
     
     
     private Control ctrl;

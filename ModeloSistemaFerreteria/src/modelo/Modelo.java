@@ -23,7 +23,7 @@ import modelo.productos.*;
  * @author Michael Chen W.
  */
 public class Modelo {
-    
+
     private Modelo() {
         observers = new AdaptadorSubject();
         dbc = new DataBaseConnection();
@@ -35,22 +35,22 @@ public class Modelo {
         conjuntoPagos = new ConjuntoPagos(dbc);
         emp = null;
     }
-    
+
     static public Modelo getInstance() {
         if (instance == null) {
             instance = new Modelo();
         }
         return instance;
     }
-    
+
     public void agregar(Observer obs) {
         observers.agregar(obs);
     }
-    
+
     public void notificar() {
         observers.notificar();
     }
-    
+
     public Empleado verifyCredentials(String id, String pass) {
         try {
             emp = conjuntoEmpleados.getEmpleadoByIdAndPass(id, pass);
@@ -61,7 +61,7 @@ public class Modelo {
         }
         return null;
     }
-    
+
     public Cliente searchClientByID(String id) {
         Cliente cliente = new Cliente();
         try {
@@ -71,7 +71,7 @@ public class Modelo {
         }
         return null;
     }
-    
+
     public LinkedList<Cliente> searchClientByName(String name) {
         LinkedList<Cliente> listaResultado = new LinkedList<>();
         try {
@@ -93,10 +93,11 @@ public class Modelo {
     public void deleteClient(String id) throws Exception {
         conjuntoClientes.deleteCliente(id);
     }
-    public void updateClient(Cliente cliente) throws Exception{
-    conjuntoClientes.updateCliente(cliente);
+
+    public void updateClient(Cliente cliente) throws Exception {
+        conjuntoClientes.updateCliente(cliente);
     }
-    
+
     //PRODUCTOS.....
     public void addProducto(String cod, String desc, String unidad, double precio, boolean activo) {
         Producto p = new Producto(cod, desc, unidad, precio, activo);
@@ -104,6 +105,15 @@ public class Modelo {
             conjuntoProductos.addProducto(p);
             observers.notificar();
         } catch (Exception ex) {
+        }
+    }
+
+    public boolean verificarExistenciaProducto(String cod) {
+        try {
+            Producto p = conjuntoProductos.getProductoByCod(cod);
+            return true;
+        } catch (Exception ex) {
+            return false;
         }
     }
     public Producto getProducto(String cod) {
@@ -124,7 +134,28 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
-    
+
+    public boolean verificarExistenciaEmpleado(String id) {
+        try {
+            Empleado em = conjuntoEmpleados.getEmpleadoByID(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    public void addEmpleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador){
+        Empleado emp= new Empleado(idEmpleado,nombre,clave,activo,vendedor,cajero,despachador,bodeguero,administrador);
+        try {
+            conjuntoEmpleados.addEmpleado(emp);
+        } catch (Exception ex) {
+        }
+    }
+    public void deleteEmpleado(String id){
+        try {
+            conjuntoEmpleados.deleteEmpleado(id);
+        } catch (Exception ex) {
+        }
+    }
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
