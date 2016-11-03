@@ -25,7 +25,8 @@ public class Control {
         login = new VentanaLogin(this);
         menu = new VentanaMenu(this);
         ventas = new VentanaVentas(this);
-        clientes = new VCatalogoClientes(this);
+        //clientes = new VCatalogoClientes(this);
+        clientes = new VentanaCliente(this);
         productos = new VCatalogoProductos(this);
         empleados = new VMantListaEmple(this);
         inventario = new VInventario(this);
@@ -86,6 +87,14 @@ public class Control {
 
     public void updateCliente(Cliente cliente) throws Exception {
         modelo.updateClient(cliente);
+    }
+
+    public boolean verificarExistenciaCliente(String id) {
+        return modelo.verificarExistenciaCliente(id);
+    }
+
+    public String mensajeCliente(Cliente cliente) {
+       return  modelo.mensajeCliente(cliente);
     }
 
     public void mostrarClientes() {
@@ -177,7 +186,8 @@ public class Control {
     private VentanaLogin login;
     private VentanaMenu menu;
     private VentanaVentas ventas;
-    private VCatalogoClientes clientes;
+    //private VCatalogoClientes clientes;
+    private VentanaCliente clientes;
     private VCatalogoProductos productos;
     private VMantListaEmple empleados;
     private VInventario inventario;
