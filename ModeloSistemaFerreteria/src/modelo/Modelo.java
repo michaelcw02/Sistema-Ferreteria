@@ -52,6 +52,7 @@ public class Modelo {
     public void notificar() {
         observers.notificar();
     }
+//CLIENTES
 
     public Empleado verifyCredentials(String id, String pass) {
         try {
@@ -100,6 +101,26 @@ public class Modelo {
         conjuntoClientes.updateCliente(cliente);
     }
 
+    public boolean verificarExistenciaCliente(String id) {
+        try {
+            Cliente em = conjuntoClientes.getClienteByID(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public String mensajeCliente(Cliente cliente) {
+        String nombre = cliente.getNombre();
+        String email = cliente.getEmail();
+        String telefono = cliente.getTelefono();
+        String id = cliente.getCedula();
+        int descuento = cliente.getDescuento();
+        String msj=("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
+                                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
+                                + '\n' + "MONTO DESCUENTO: " + descuento+'\n');
+        return msj;
+    }
     //PRODUCTOS.....
     public void addProducto(String cod, String desc, String unidad, double precio, boolean activo) {
         Producto p = new Producto(cod, desc, unidad, precio, activo);
@@ -147,6 +168,7 @@ public class Modelo {
         } catch (Exception e) {
         }
     }
+//EMPLEADOS
 
     public boolean verificarExistenciaEmpleado(String id) {
         try {
@@ -236,6 +258,7 @@ public class Modelo {
     public LinkedList<Inventario> getAllInventarios() {
         return conjuntoInventarios.getAllInventario();
     }
+
     public void addInventario(Date date, String pro, int cant) {
         try {
             Producto producto = conjuntoProductos.getProductoByCod(pro);
@@ -245,7 +268,6 @@ public class Modelo {
             System.out.println("notify");
         } catch (Exception ex) {
         }
-        
     }
 
     public static Modelo instance;
