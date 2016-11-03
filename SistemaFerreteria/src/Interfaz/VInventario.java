@@ -7,17 +7,11 @@ package Interfaz;
 
 import control.Control;
 import interfaces.Observer;
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.LinkedList;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import modelo.inventarios.Inventario;
 import modelo.productos.Producto;
 
@@ -45,13 +39,15 @@ public class VInventario extends javax.swing.JFrame implements Observer{
     private void setBlank() {
         txtFieldFecha.setText("");
         txtFieldFecha.setEditable(false);
-        txtFieldCodigo.setText("");
+        txtFieldCodProducto.setText("");
+        txtFieldCodProducto.setEditable(false);
         txtFieldCantidad.setText("");
     }
     @Override
     public void update() {
-        updateTableProducto();
         updateTableInventario();
+        updateTableProducto();
+        System.out.println("update");
     }
     private void updateTableProducto() {
         LinkedList<Producto> list = ctrl.getAllProductos();
@@ -91,7 +87,6 @@ public class VInventario extends javax.swing.JFrame implements Observer{
         ctrl.mostrarMenu();
     }
     private void addActions() {
-        addDocumentListener(txtFieldCodigo, table1);
         table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
@@ -104,56 +99,11 @@ public class VInventario extends javax.swing.JFrame implements Observer{
     private void tableAction() {
         int row = table1.getSelectedRow();
         String value = "";
-        
-        
         date = new Date();
         txtFieldFecha.setText(dateToString(date));
-        
         value = table1.getModel().getValueAt(row, 0).toString();
-        System.out.println(value);
-    //    txtFieldCodigo.setText(value);
-
-        
-        
-
+        txtFieldCodProducto.setText(value);
     }
-    private void addDocumentListener(javax.swing.JTextField txtField, javax.swing.JTable table) {
-        
-        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
-        table.setRowSorter(rowSorter);
-        
-        txtField.getDocument().addDocumentListener(new DocumentListener(){
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                String text = txtField.getText();
-
-                if (text.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String text = txtField.getText();
-
-                if (text.trim().length() == 0) {
-                    rowSorter.setRowFilter(null);
-                } else {
-                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-        });
-    }
-
     public void setDate(Date date) {
         this.date = date;
     }    
@@ -173,7 +123,6 @@ public class VInventario extends javax.swing.JFrame implements Observer{
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtFieldCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtFieldCantidad = new javax.swing.JTextField();
         txtFieldFecha = new javax.swing.JTextField();
@@ -181,6 +130,7 @@ public class VInventario extends javax.swing.JFrame implements Observer{
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
+        txtFieldCodProducto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,8 +189,6 @@ public class VInventario extends javax.swing.JFrame implements Observer{
 
         jLabel4.setText("Codigo del Producto:");
 
-        txtFieldCodigo.setText("<CODIGO DE PRODUCTO>");
-
         jLabel5.setText("Cantidad a ingresar:");
 
         txtFieldCantidad.setText("<CANT DEL PRODUCTO>");
@@ -282,6 +230,8 @@ public class VInventario extends javax.swing.JFrame implements Observer{
         });
         jScrollPane2.setViewportView(table1);
 
+        txtFieldCodProducto.setText("<Codigo Producto>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -308,11 +258,11 @@ public class VInventario extends javax.swing.JFrame implements Observer{
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnInsertar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFieldCantidad)
-                            .addComponent(txtFieldCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtFieldCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(25, 25, 25)
+                            .addComponent(txtFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
@@ -330,9 +280,9 @@ public class VInventario extends javax.swing.JFrame implements Observer{
                         .addComponent(txtFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtFieldCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -360,10 +310,10 @@ public class VInventario extends javax.swing.JFrame implements Observer{
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         Date date = stringToDate(txtFieldFecha.getText());
-        String pro = txtFieldCodigo.getText();
+        String pro = txtFieldCodProducto.getText();
         int cant = Integer.parseInt(txtFieldCantidad.getText());
         
-        ctrl.addInventario();
+        ctrl.addInventario(date, pro, cant);
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
@@ -387,7 +337,7 @@ public class VInventario extends javax.swing.JFrame implements Observer{
     private javax.swing.JTable table1;
     private javax.swing.JTable table2;
     private javax.swing.JTextField txtFieldCantidad;
-    private javax.swing.JTextField txtFieldCodigo;
+    private javax.swing.JTextField txtFieldCodProducto;
     private javax.swing.JTextField txtFieldFecha;
     // End of variables declaration//GEN-END:variables
 
