@@ -40,6 +40,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     @Override
     public void update() {
         updateTable(table1);
+        updateTable(table2);
     }
     
     public void mainInit() {
@@ -47,6 +48,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         initInclusion();
         initModificacion();
         initBorrar();
+        setBlankBuscar();
     }
     private void initModificacion() {
         initButtons(btnTrue2, btnFalse2);
@@ -87,6 +89,9 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         txtFieldDetBorrar.setText("");
         lblExistencia1.setText("");
     }
+    private void setBlankBuscar() {
+        txtFieldBusqueda1.setText("");
+    }
     
     private void addActions() {
         jTabbedPane2.addChangeListener(new ChangeListener() {
@@ -95,7 +100,8 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             JTabbedPane tabbedPane = (JTabbedPane) e.getSource();
             int index = tabbedPane.getSelectedIndex();
             switch(tabbedPane.getTitleAt(index)) {
-                case MODIFICACION: updateTable(table1); break;
+                case MODIFICACION:  updateTable(table1); break;
+                case BUSCAR:        updateTable(table2); break;
             }
         }
         });
@@ -105,6 +111,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
                 tableAction();
             }
         });
+        addDocumentListener(txtFieldBusqueda1, table2);
     }
     private void addDocumentListener(javax.swing.JTextField txtField, javax.swing.JTable table) {
         
@@ -178,7 +185,6 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         value = table1.getModel().getValueAt(row, column++).toString();
         if(value == "true")
             btnTrue2.setSelected(true);
-
         else
             btnFalse2.setSelected(true);
     }
@@ -242,6 +248,10 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         jLabel15 = new javax.swing.JLabel();
         txtFieldDetBorrar = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        txtFieldBusqueda1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table2 = new javax.swing.JTable();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -621,15 +631,86 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
 
         jTabbedPane2.addTab("Borrar Productos", jPanel4);
 
+        jLabel14.setText("Ingrese el dato que deseas buscar:");
+
+        txtFieldBusqueda1.setText("<Buscar>");
+        txtFieldBusqueda1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFieldBusqueda1FocusGained(evt);
+            }
+        });
+        txtFieldBusqueda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldBusqueda1ActionPerformed(evt);
+            }
+        });
+        txtFieldBusqueda1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFieldBusqueda1KeyTyped(evt);
+            }
+        });
+
+        table2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cod", "Des", "Medida", "Precio", "Activo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        table2.getTableHeader().setReorderingAllowed(false);
+        table2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                table2FocusGained(evt);
+            }
+        });
+        table2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(table2);
+        table2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtFieldBusqueda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Buscar Producto", jPanel1);
@@ -762,8 +843,29 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         setBlankBorrar();
     }//GEN-LAST:event_btnConfirmarBorrarActionPerformed
 
+    private void txtFieldBusqueda1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldBusqueda1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldBusqueda1FocusGained
+
+    private void txtFieldBusqueda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldBusqueda1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldBusqueda1ActionPerformed
+
+    private void txtFieldBusqueda1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldBusqueda1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldBusqueda1KeyTyped
+
+    private void table2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_table2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table2FocusGained
+
+    private void table2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table2MouseClicked
+
     private Control ctrl;
     static private final String MODIFICACION = "Modificacion de productos";
+    static private final String BUSCAR = "Buscar Producto";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -783,6 +885,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -797,11 +900,14 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblExistencia;
     private javax.swing.JLabel lblExistencia1;
     private javax.swing.JTable table1;
+    private javax.swing.JTable table2;
     private javax.swing.JTextField txtFieldBusqueda;
+    private javax.swing.JTextField txtFieldBusqueda1;
     private javax.swing.JTextField txtFieldCodBorrar;
     private javax.swing.JTextField txtFieldCodi;
     private javax.swing.JTextField txtFieldCodigo;
