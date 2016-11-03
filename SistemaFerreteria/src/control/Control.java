@@ -110,6 +110,9 @@ public class Control {
     public boolean verificarExistenciaProducto(String codigo) {
         return (modelo.getProducto(codigo) != null) ? true : false;
     }
+    public void deleteProducto(String cod) {
+        modelo.deleteProducto(cod);
+    }
     
     public boolean verificarExistenciaEmpleado(String emp) {
         return modelo.verificarExistenciaEmpleado(emp);

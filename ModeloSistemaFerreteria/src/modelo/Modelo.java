@@ -134,6 +134,13 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+    public void deleteProducto(String cod) {
+        try {
+            conjuntoProductos.deleteProducto(cod);
+            observers.notificar();
+        } catch (Exception e) {
+        }
+    }
 
     public boolean verificarExistenciaEmpleado(String id) {
         try {

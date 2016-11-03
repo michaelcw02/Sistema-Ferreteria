@@ -46,6 +46,46 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         addActions();
         initInclusion();
         initModificacion();
+        initBorrar();
+    }
+    private void initModificacion() {
+        initButtons(btnTrue2, btnFalse2);
+        setBlankModificacion();
+    }
+    private void setBlankModificacion() {
+        txtFieldCodi.setText("");
+        txtFieldCodi.setEditable(false);
+        txtFieldDesc2.setText("");
+        txtFieldPrecio2.setText("");
+        txtFieldUM2.setText("");
+        txtFieldBusqueda.setText("");
+    }
+    
+    private void initInclusion() {
+        initButtons(btnTrue, btnFalse);
+        setBlankInclusion();
+    }    
+    
+    private void setBlankInclusion() {
+        lblExistencia.setText("");
+        txtFieldCodigo.setText("");
+        txtFieldDescripcion.setText("");
+        txtFieldPrecioUnitario.setText("0.0");
+        txtFieldUnidadMedida.setText("");
+    }
+    private void initButtons(javax.swing.JRadioButton btnTrue, javax.swing.JRadioButton btnFalse) {
+        ButtonGroup group = new ButtonGroup();
+        group.add(btnTrue);
+        group.add(btnFalse);
+        btnFalse.setSelected(true);
+    }
+    private void initBorrar() {
+        setBlankBorrar();
+    }
+    private void setBlankBorrar() {
+        txtFieldCodBorrar.setText("");
+        txtFieldDetBorrar.setText("");
+        lblExistencia1.setText("");
     }
     
     private void addActions() {
@@ -59,7 +99,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             }
         }
         });
-        addDocumentListener(txtFieldCod2, table1);
+        addDocumentListener(txtFieldBusqueda, table1);
         table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 tableAction();
@@ -101,39 +141,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             }
 
         });
-    }
-    
-    private void initModificacion() {
-        initButtons(btnTrue2, btnFalse2);
-        setBlankModificacion();
-    }
-    private void setBlankModificacion() {
-        txtFieldCodi.setText("");
-        txtFieldCodi.setEditable(false);
-        txtFieldDesc2.setText("");
-        txtFieldPrecio2.setText("");
-        txtFieldUM2.setText("");
-    }
-    
-    private void initInclusion() {
-        initButtons(btnTrue, btnFalse);
-        setBlankInclusion();
     }    
-    
-    private void setBlankInclusion() {
-        lblExistencia.setText("");
-        txtFieldCodigo.setText("");
-        txtFieldDescripcion.setText("");
-        txtFieldPrecioUnitario.setText("0.0");
-        txtFieldUnidadMedida.setText("");
-    }
-    private void initButtons(javax.swing.JRadioButton btnTrue, javax.swing.JRadioButton btnFalse) {
-        ButtonGroup group = new ButtonGroup();
-        group.add(btnTrue);
-        group.add(btnFalse);
-        btnFalse.setSelected(true);
-    }
-    
     private void updateTable(javax.swing.JTable table) {
         LinkedList<Producto> list = ctrl.getAllProductos();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -213,7 +221,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        txtFieldCod2 = new javax.swing.JTextField();
+        txtFieldBusqueda = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -225,7 +233,14 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         btnFalse2 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         txtFieldCodi = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        txtFieldCodBorrar = new javax.swing.JTextField();
+        btnConfirmarBorrar = new javax.swing.JButton();
+        lblExistencia1 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtFieldDetBorrar = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -327,7 +342,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
                         .addComponent(jButton2)
                         .addGap(36, 36, 36)
                         .addComponent(btnAgregar)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,15 +429,20 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             }
         });
 
-        txtFieldCod2.setText("<Buscar Codigo>");
-        txtFieldCod2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtFieldBusqueda.setText("<Buscar>");
+        txtFieldBusqueda.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFieldCod2FocusGained(evt);
+                txtFieldBusquedaFocusGained(evt);
             }
         });
-        txtFieldCod2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtFieldBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldBusquedaActionPerformed(evt);
+            }
+        });
+        txtFieldBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFieldCod2KeyTyped(evt);
+                txtFieldBusquedaKeyTyped(evt);
             }
         });
 
@@ -448,14 +468,16 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
 
         txtFieldCodi.setText("<Codigo>");
 
+        jLabel12.setText("Ingrese el dato que deseas buscar:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,25 +501,26 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
                                         .addGap(18, 18, 18)
                                         .addComponent(btnFalse2)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtFieldUM2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(txtFieldUM2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                     .addComponent(txtFieldDesc2)
                                     .addComponent(txtFieldPrecio2)
                                     .addComponent(txtFieldCodi)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFieldCod2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtFieldCod2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addContainerGap(50, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(txtFieldCodi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -521,7 +544,11 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -530,15 +557,66 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
 
         jTabbedPane2.addTab("Modificacion de productos", jPanel3);
 
+        jLabel13.setText("Ingrese el codigo del producto que deseas borrar:");
+
+        txtFieldCodBorrar.setText("<Codigo Producto>");
+        txtFieldCodBorrar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFieldCodBorrarFocusLost(evt);
+            }
+        });
+
+        btnConfirmarBorrar.setText("Confirmar");
+        btnConfirmarBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarBorrarActionPerformed(evt);
+            }
+        });
+
+        lblExistencia1.setText("<Existencia de producto>");
+
+        jLabel15.setText("Ingrese la descripcion del producto que deseas borrar:");
+
+        txtFieldDetBorrar.setText("<Detalle Producto>");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(btnConfirmarBorrar)
+                        .addGap(156, 156, 156))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFieldDetBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldCodBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
+                .addComponent(lblExistencia1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtFieldCodBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblExistencia1))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtFieldDetBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(btnConfirmarBorrar)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Borrar Productos", jPanel4);
@@ -547,7 +625,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+            .addGap(0, 669, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,26 +684,28 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtFieldCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldCodigoFocusLost
-        if(!ctrl.verificarExistenciaProducto(txtFieldCodigo.getText())) {
-            lblExistencia.setForeground(Color.GREEN);
-            lblExistencia.setText("✔");
-        } else {
-            lblExistencia.setForeground(Color.RED);
-            lblExistencia.setText("✘");
-        }            
+        if (!txtFieldCodigo.getText().equalsIgnoreCase("")) {
+            if (!ctrl.verificarExistenciaProducto(txtFieldCodigo.getText())) {
+                lblExistencia.setForeground(Color.GREEN);
+                lblExistencia.setText("✔");
+            } else {
+                lblExistencia.setForeground(Color.RED);
+                lblExistencia.setText("✘");
+            }
+        }
     }//GEN-LAST:event_txtFieldCodigoFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         home();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtFieldCod2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldCod2KeyTyped
+    private void txtFieldBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldBusquedaKeyTyped
         
-    }//GEN-LAST:event_txtFieldCod2KeyTyped
+    }//GEN-LAST:event_txtFieldBusquedaKeyTyped
 
-    private void txtFieldCod2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldCod2FocusGained
-        txtFieldCod2.setText("");
-    }//GEN-LAST:event_txtFieldCod2FocusGained
+    private void txtFieldBusquedaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldBusquedaFocusGained
+        txtFieldBusqueda.setText("");
+    }//GEN-LAST:event_txtFieldBusquedaFocusGained
 
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
         
@@ -660,11 +740,34 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
         
     }//GEN-LAST:event_table1FocusGained
 
+    private void txtFieldBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldBusquedaActionPerformed
+
+    private void txtFieldCodBorrarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldCodBorrarFocusLost
+        if (!txtFieldCodBorrar.getText().equalsIgnoreCase("")) {
+            if (ctrl.verificarExistenciaProducto(txtFieldCodBorrar.getText())) {
+                lblExistencia1.setForeground(Color.GREEN);
+                lblExistencia1.setText("✔");
+            } else {
+                lblExistencia1.setForeground(Color.RED);
+                lblExistencia1.setText("✘");
+            }
+        }
+    }//GEN-LAST:event_txtFieldCodBorrarFocusLost
+
+    private void btnConfirmarBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarBorrarActionPerformed
+        String cod = txtFieldCodBorrar.getText();
+        ctrl.deleteProducto(cod);
+        setBlankBorrar();
+    }//GEN-LAST:event_btnConfirmarBorrarActionPerformed
+
     private Control ctrl;
     static private final String MODIFICACION = "Modificacion de productos";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConfirmarBorrar;
     private javax.swing.JRadioButton btnFalse;
     private javax.swing.JRadioButton btnFalse2;
     private javax.swing.ButtonGroup btnGroup2;
@@ -678,6 +781,9 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -693,12 +799,15 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblExistencia;
+    private javax.swing.JLabel lblExistencia1;
     private javax.swing.JTable table1;
-    private javax.swing.JTextField txtFieldCod2;
+    private javax.swing.JTextField txtFieldBusqueda;
+    private javax.swing.JTextField txtFieldCodBorrar;
     private javax.swing.JTextField txtFieldCodi;
     private javax.swing.JTextField txtFieldCodigo;
     private javax.swing.JTextField txtFieldDesc2;
     private javax.swing.JTextField txtFieldDescripcion;
+    private javax.swing.JTextField txtFieldDetBorrar;
     private javax.swing.JTextField txtFieldPrecio2;
     private javax.swing.JTextField txtFieldPrecioUnitario;
     private javax.swing.JTextField txtFieldUM2;
