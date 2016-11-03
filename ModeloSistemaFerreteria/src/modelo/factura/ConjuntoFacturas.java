@@ -62,7 +62,7 @@ public class ConjuntoFacturas {
         }
         return listaResultado;
     }
-    public LinkedList<Factura> searchInventarioByDate(Date fecha) {
+    public LinkedList<Factura> searchFacturaByDate(Date fecha) {
         
         LinkedList<Factura> listaResultado = new LinkedList<>();
         try {
@@ -115,7 +115,7 @@ public class ConjuntoFacturas {
         if(result != 0)
             updateDetalles(fac);
         else 
-            throw new Exception("Inventario inexistente.");            
+            throw new Exception("Factura inexistente.");            
     }
     
     public void updateDetalles(Factura fac) {
