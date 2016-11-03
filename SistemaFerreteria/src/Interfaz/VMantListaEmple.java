@@ -591,6 +591,7 @@ public class VMantListaEmple extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Empleado inexistente", "ERROR", 0);
         }
         cedula.setText("");
+        existencia.setText(" ");
     }//GEN-LAST:event_borrarActionPerformed
 
     private void txtFieldCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldCedulaFocusLost
@@ -637,13 +638,13 @@ public class VMantListaEmple extends javax.swing.JFrame {
         String nom = nomModificar.getText();
         String id = cedModificar.getText();
         String clave = claveModificar.getText();
-        boolean ven = (vendedorM.isSelected());
-        boolean caj = (cajeroM.isSelected());
-        boolean desp = (despachadorM.isSelected());
-        boolean bodeg = (bodegueroM.isSelected());
-        boolean adm = (admiM.isSelected());
+        boolean ven = (vendedorM.isSelected())?true:false;
+        boolean caj = (cajeroM.isSelected())?true:false;
+        boolean desp = (despachadorM.isSelected())?true:false;
+        boolean bodeg = (bodegueroM.isSelected())?true:false;
+        boolean adm = (admiM.isSelected())?true:false;
         if (!"".equals(clave)) {
-            ctrl.addEmpleado(id, nom, clave, true, ven, caj, desp, bodeg, adm);
+            ctrl.updateEmpleado(ctrl.createEmpleado(id, nom, clave, true, ven, caj, desp, bodeg, adm));
         }
         JOptionPane.showMessageDialog(this, "Empleado modificado con exito", "AVISO", 1);
         clearModificar();

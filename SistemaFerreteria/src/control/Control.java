@@ -131,12 +131,21 @@ public class Control {
         }
     }
 
+    public Empleado createEmpleado(String idEmpleado, String nombre, String clave, boolean activo,
+            boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+        return modelo.createEmpleado(idEmpleado, nombre, clave, activo, vendedor, cajero, despachador, bodeguero, administrador);
+    }
+
     public Empleado searchEmpleadoByID(String text) {
         return modelo.searchEmpleadoByID(text);
     }
 
     public String empleadoMensaje(Empleado empleado) {
         return modelo.mensajeEmpleado(empleado);
+    }
+
+    public void updateEmpleado(Empleado empl) {
+        modelo.updateEmpleado(empl);
     }
 
     public LinkedList<Empleado> searchEmpleadoByName(String nom) {
