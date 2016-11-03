@@ -6,10 +6,10 @@
 package control;
 
 import Interfaz.*;
+import java.util.Date;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Modelo;
+import modelo.inventarios.Inventario;
 import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
 import modelo.productos.Producto;
@@ -28,13 +28,14 @@ public class Control {
         clientes = new VCatalogoClientes(this);
         productos = new VCatalogoProductos(this);
         empleados = new VMantListaEmple(this);
-
+        inventario = new VInventario(this);
         //
         setObservers();
     }
     
     private void setObservers() {
         modelo.agregar(productos);
+        modelo.agregar(inventario);
         //this keeeps going down.
     }
     
@@ -135,7 +136,16 @@ public class Control {
         modelo.updateProducto(cod, des, med, precio, activo);
     }
     
-    
+    public void mostrarInventario() {
+        inventario.show();
+        inventario.setDate(new Date());
+    }
+    public LinkedList<Inventario>  getAllInventarios() {
+        return modelo.getAllInventarios();
+    }
+    public void addInventario() {
+        System.out.println("Missing the add");
+    }
     
     
     
@@ -148,4 +158,5 @@ public class Control {
     private VCatalogoClientes clientes;
     private VCatalogoProductos productos;
     private VMantListaEmple empleados;
+    private VInventario inventario;
 }

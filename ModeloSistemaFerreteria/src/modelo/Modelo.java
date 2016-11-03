@@ -14,6 +14,7 @@ import modelo.cobros.ConjuntoPagos;
 import modelo.database.DataBaseConnection;
 import modelo.factura.ConjuntoFacturas;
 import modelo.inventarios.ConjuntoInventarios;
+import modelo.inventarios.Inventario;
 import modelo.personas.clientes.*;
 import modelo.personas.empleados.*;
 import modelo.productos.*;
@@ -163,6 +164,15 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+    
+    public LinkedList<Inventario>  getAllInventarios() {
+        return conjuntoInventarios.getAllInventario();
+    }
+    public void addInventario() {
+        
+    }
+    
+    
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;

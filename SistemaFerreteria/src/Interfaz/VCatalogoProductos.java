@@ -159,7 +159,6 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
             o = new Object[]{p.getCodigo(), p.getDescripcion(), p.getUnidadMedida(), p.getPrecio(), p.isActivo()};
             model.addRow(o);
         }
-        
     }
     
     private void home() {
@@ -418,6 +417,7 @@ public class VCatalogoProductos extends javax.swing.JFrame implements Observer{
                 return canEdit [columnIndex];
             }
         });
+        table1.setColumnSelectionAllowed(true);
         table1.getTableHeader().setReorderingAllowed(false);
         table1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

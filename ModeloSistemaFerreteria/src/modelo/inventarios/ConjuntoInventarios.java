@@ -22,7 +22,18 @@ public class ConjuntoInventarios {
     public ConjuntoInventarios(DataBaseConnection dbc) {
         this.dbc = dbc;
     }
-    
+    public LinkedList<Inventario> getAllInventario() {
+        LinkedList<Inventario> listaResultado = new LinkedList<>();
+        try {
+            String query = "SELECT * " + "FROM Inventario;";
+            query = String.format(query);
+            ResultSet rs = dbc.executeQuery(query);
+            while (rs.next())
+                listaResultado.add(inventario(rs));
+        } catch (Exception e) {
+        }
+        return listaResultado;
+    }
     public Inventario getInventario(Date date, String codigo) throws Exception{
         
         String query = "SELECT * " + "FROM Inventario WHERE Fecha = '%s'  AND Producto = '%s';";
@@ -35,7 +46,7 @@ public class ConjuntoInventarios {
             throw new Exception("Inventario inexistente.");
         }
     }
-    public LinkedList<Inventario> searchInventarioByProducto(String codigo) throws Exception{
+    public LinkedList<Inventario> searchInventarioByProducto(String codigo) {
         LinkedList<Inventario> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * " + "FROM Inventario WHERE Producto like '%%%s%%'";
@@ -44,7 +55,7 @@ public class ConjuntoInventarios {
             while (rs.next()) {
                 listaResultado.add(inventario(rs));
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
         }
         return listaResultado;
     }
