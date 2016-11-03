@@ -143,8 +143,8 @@ public class Control {
     public LinkedList<Inventario>  getAllInventarios() {
         return modelo.getAllInventarios();
     }
-    public void addInventario() {
-        System.out.println("Missing the add");
+    public void addInventario(Date date, String pro, int cant) {
+        modelo.addInventario(date, pro, cant);
     }
     
     
