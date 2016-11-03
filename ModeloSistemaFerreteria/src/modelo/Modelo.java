@@ -7,6 +7,7 @@ package modelo;
 
 import adaptadores.AdaptadorSubject;
 import interfaces.Observer;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -168,7 +169,15 @@ public class Modelo {
     public LinkedList<Inventario>  getAllInventarios() {
         return conjuntoInventarios.getAllInventario();
     }
-    public void addInventario() {
+    public void addInventario(Date date, String pro, int cant) {
+        try {
+            Producto producto = conjuntoProductos.getProductoByCod(pro);
+            Inventario inventario = new Inventario(date, producto, cant);
+            conjuntoInventarios.addInventario(inventario);
+            observers.notificar();
+            System.out.println("notify");
+        } catch (Exception ex) {
+        }
         
     }
     
