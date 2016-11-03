@@ -187,29 +187,48 @@ public class Modelo {
         }
     }
 
+    public void updateEmpleado(Empleado empl) {
+        try {
+            conjuntoEmpleados.updateEmpleado(empl);
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public Empleado createEmpleado(String idEmpleado, String nombre, String clave, boolean activo,
+            boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+        Empleado empleado = new Empleado(idEmpleado, nombre, clave, activo, vendedor, cajero, despachador, bodeguero, administrador);
+        return empleado;
+    }
+
     public String mensajeEmpleado(Empleado em) {
         String nombre = em.getNombre();
         String id = em.getIdEmpleado();
-        String clave = emp.getClave();
-        String vendedor="false";
-        if(em.isVendedor())
-            vendedor="true";
-        String bodeguero="false";
-        if(em.isBodeguero())
-            bodeguero="true";
-        String cajero="false";
-        if(em.isCajero())
-            cajero="true";
-        String despachador="false";
-        if(em.isDespachador())
-            despachador="true";
-        String admi="false";
-        if(em.isAdministrador())
-            admi="true";
-        
-        String msj = ("NOMBRE: " + nombre + '\n' + "CEDULA: " + id+ '\n' + "CLAVE: " + clave
-                + '\n' + "ES_VENDEDOR: " + vendedor+ '\n' + "ES_CAJERO: " + cajero+ '\n' + "ES_BODEGUERO: "
-                + bodeguero+ '\n' + "ES_DESPACHADOR: " + despachador+ '\n' + "ES_ADMINISTRADOR: " + admi);
+        String clave = em.getClave();
+        String vendedor = "false";
+        if (em.isVendedor()) {
+            vendedor = "true";
+        }
+        String bodeguero = "false";
+        if (em.isBodeguero()) {
+            bodeguero = "true";
+        }
+        String cajero = "false";
+        if (em.isCajero()) {
+            cajero = "true";
+        }
+        String despachador = "false";
+        if (em.isDespachador()) {
+            despachador = "true";
+        }
+        String admi = "false";
+        if (em.isAdministrador()) {
+            admi = "true";
+        }
+
+        String msj = ("NOMBRE: " + nombre + '\n' + "CEDULA: " + id + '\n' + "CLAVE: " + clave
+                + '\n' + "ES_VENDEDOR: " + vendedor + '\n' + "ES_CAJERO: " + cajero + '\n' + "ES_BODEGUERO: "
+                + bodeguero + '\n' + "ES_DESPACHADOR: " + despachador + '\n' + "ES_ADMINISTRADOR: " + admi);
         return msj;
     }
 
