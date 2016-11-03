@@ -7,8 +7,10 @@ package Interfaz;
 
 import control.Control;
 import java.awt.Color;
+import java.util.Iterator;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import modelo.personas.empleados.Empleado;
 
 /**
  *
@@ -22,7 +24,6 @@ public class VMantListaEmple extends javax.swing.JFrame {
     public VMantListaEmple(Control c) {
         initComponents();
         ctrl = c;
-
     }
 
     /**
@@ -52,6 +53,23 @@ public class VMantListaEmple extends javax.swing.JFrame {
         administrador = new javax.swing.JRadioButton();
         bodeguero = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        cedBuscar = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        vendedorM = new javax.swing.JRadioButton();
+        cajeroM = new javax.swing.JRadioButton();
+        despachadorM = new javax.swing.JRadioButton();
+        bodegueroM = new javax.swing.JRadioButton();
+        admiM = new javax.swing.JRadioButton();
+        nomModificar = new javax.swing.JTextField();
+        cedModificar = new javax.swing.JTextField();
+        claveModificar = new javax.swing.JTextField();
+        modificar = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         cedula = new javax.swing.JTextField();
@@ -60,6 +78,20 @@ public class VMantListaEmple extends javax.swing.JFrame {
         borrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        buscarCedula = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        nombreB = new javax.swing.JTextField();
+        buscarB = new javax.swing.JButton();
+        buscarBN = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textArea2 = new javax.swing.JTextArea();
+        clear1 = new javax.swing.JButton();
+        clear2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,15 +215,127 @@ public class VMantListaEmple extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Inclusion de Empleado", jPanel2);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("INGRESE LA CEDULA DEL EMPLEADO A MODIFICAR:");
+
+        jLabel13.setText("Cedula:");
+
+        jLabel14.setText("Nombre:");
+
+        jLabel15.setText("Cedula:");
+
+        jLabel16.setText("Clave:");
+
+        jLabel17.setText("Roles:");
+
+        vendedorM.setText("Vendedor");
+
+        cajeroM.setText("Cajero");
+
+        despachadorM.setText("Despachador");
+
+        bodegueroM.setText("Bodeguero");
+
+        admiM.setText("Administrador");
+
+        nomModificar.setEditable(false);
+
+        cedModificar.setEditable(false);
+
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
+        buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(31, 31, 31)
+                                .addComponent(vendedorM)
+                                .addGap(18, 18, 18)
+                                .addComponent(cajeroM)
+                                .addGap(18, 18, 18)
+                                .addComponent(despachadorM))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel13))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(claveModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cedModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                            .addComponent(nomModificar, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cedBuscar, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(buscar))))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(bodegueroM)
+                        .addGap(18, 18, 18)
+                        .addComponent(admiM)
+                        .addGap(85, 85, 85)
+                        .addComponent(modificar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(cedBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(nomModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(cedModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(claveModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(vendedorM)
+                    .addComponent(cajeroM)
+                    .addComponent(despachadorM))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bodegueroM)
+                    .addComponent(admiM)
+                    .addComponent(modificar))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Modificacion de Empleado", jPanel3);
@@ -246,10 +390,11 @@ public class VMantListaEmple extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(borrar)
                 .addContainerGap(164, Short.MAX_VALUE))
@@ -268,15 +413,118 @@ public class VMantListaEmple extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Borrar Empleado", jPanel4);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("BUSCAR EMPLEADO POR CEDULA:");
+
+        jLabel9.setText("Cedula: ");
+
+        textArea.setEditable(false);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("BUSCAR EMPLEADO POR NOMBRE:");
+
+        jLabel11.setText("Nombre:");
+
+        buscarB.setText("Buscar");
+        buscarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarBActionPerformed(evt);
+            }
+        });
+
+        buscarBN.setText("Buscar");
+        buscarBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarBNActionPerformed(evt);
+            }
+        });
+
+        textArea2.setColumns(20);
+        textArea2.setRows(5);
+        jScrollPane2.setViewportView(textArea2);
+
+        clear1.setText("Clear");
+        clear1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear1ActionPerformed(evt);
+            }
+        });
+
+        clear2.setText("Clear");
+        clear2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(buscarCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(nombreB)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(clear1)
+                                .addComponent(buscarB))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(clear2)
+                                .addComponent(buscarBN)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(buscarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clear1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(nombreB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buscarBN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clear2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Buscar Empleado", jPanel1);
@@ -339,9 +587,11 @@ public class VMantListaEmple extends javax.swing.JFrame {
         if (ctrl.verificarExistenciaEmpleado(cedula.getText())) {
             ctrl.deleteEmpleado(cedula.getText());
             JOptionPane.showMessageDialog(this, "Empleado borrado con exito", "AVISO", 1);
-        } else 
+        } else {
             JOptionPane.showMessageDialog(this, "Empleado inexistente", "ERROR", 0);
+        }
         cedula.setText("");
+        existencia.setText(" ");
     }//GEN-LAST:event_borrarActionPerformed
 
     private void txtFieldCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldCedulaFocusLost
@@ -364,33 +614,151 @@ public class VMantListaEmple extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cedulaFocusLost
 
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        String text = cedBuscar.getText();
+        if (!"".equals(text)) {
+            if (ctrl.searchEmpleadoByID(text) != null) {
+                nomModificar.setText(ctrl.searchEmpleadoByID(text).getNombre());
+                cedModificar.setText(ctrl.searchEmpleadoByID(text).getIdEmpleado());
+                claveModificar.setText(ctrl.searchEmpleadoByID(text).getClave());
+                vendedorM.setSelected(ctrl.searchEmpleadoByID(text).isVendedor());
+                cajeroM.setSelected(ctrl.searchEmpleadoByID(text).isCajero());
+                despachadorM.setSelected(ctrl.searchEmpleadoByID(text).isDespachador());
+                bodegueroM.setSelected(ctrl.searchEmpleadoByID(text).isBodeguero());
+                admiM.setSelected(ctrl.searchEmpleadoByID(text).isAdministrador());
+            } else {
+                JOptionPane.showMessageDialog(this, "Empleado inexistente", "ERROR", 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Valor cedula a buscar en blanco", "ERROR", 0);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        String nom = nomModificar.getText();
+        String id = cedModificar.getText();
+        String clave = claveModificar.getText();
+        boolean ven = (vendedorM.isSelected())?true:false;
+        boolean caj = (cajeroM.isSelected())?true:false;
+        boolean desp = (despachadorM.isSelected())?true:false;
+        boolean bodeg = (bodegueroM.isSelected())?true:false;
+        boolean adm = (admiM.isSelected())?true:false;
+        if (!"".equals(clave)) {
+            ctrl.updateEmpleado(ctrl.createEmpleado(id, nom, clave, true, ven, caj, desp, bodeg, adm));
+        }
+        JOptionPane.showMessageDialog(this, "Empleado modificado con exito", "AVISO", 1);
+        clearModificar();
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void buscarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBActionPerformed
+        String id = buscarCedula.getText();
+        if (!"".equals(id)) {
+            if (ctrl.searchEmpleadoByID(id) != null) {
+                String msj = ctrl.empleadoMensaje(ctrl.searchEmpleadoByID(id));
+                textArea.append(msj);
+            } else {
+                JOptionPane.showMessageDialog(this, "Empleado inexistente", "ERROR", 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Valor cedula a buscar en blanco", "ERROR", 0);
+        }
+    }//GEN-LAST:event_buscarBActionPerformed
+
+    private void buscarBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBNActionPerformed
+        String nom = nombreB.getText();
+        if (!" ".equals(nom)) {
+            if (ctrl.searchEmpleadoByName(nom) != null) {
+                String msj;
+                for (Iterator<Empleado> it = ctrl.searchEmpleadoByName(nom).iterator(); it.hasNext();) {
+                    Empleado empleado = it.next();
+                    msj = ctrl.empleadoMensaje(empleado);
+                    textArea2.append(msj);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Empleado inexistente", "ERROR", 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Valor cedula a buscar en blanco", "ERROR", 0);
+        }
+    }//GEN-LAST:event_buscarBNActionPerformed
+
+    private void clear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear1ActionPerformed
+        textArea.setText(" ");
+        buscarCedula.setText(" ");
+    }//GEN-LAST:event_clear1ActionPerformed
+
+    private void clear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear2ActionPerformed
+        textArea2.setText(" ");
+        nombreB.setText(" ");      
+    }//GEN-LAST:event_clear2ActionPerformed
+    private void clearModificar() {
+        nomModificar.setText(" ");
+        cedModificar.setText(" ");
+        claveModificar.setText(" ");
+        vendedorM.setSelected(false);
+        cajeroM.setSelected(false);
+        despachadorM.setSelected(false);
+        bodegueroM.setSelected(false);
+        admiM.setSelected(false);
+    }
     private Control ctrl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton admiM;
     private javax.swing.JRadioButton administrador;
     private javax.swing.JRadioButton bodeguero;
+    private javax.swing.JRadioButton bodegueroM;
     private javax.swing.JButton borrar;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton buscar;
+    private javax.swing.JButton buscarB;
+    private javax.swing.JButton buscarBN;
+    private javax.swing.JTextField buscarCedula;
     private javax.swing.JRadioButton cajero;
+    private javax.swing.JRadioButton cajeroM;
+    private javax.swing.JTextField cedBuscar;
+    private javax.swing.JTextField cedModificar;
     private javax.swing.JTextField cedula;
+    private javax.swing.JTextField claveModificar;
+    private javax.swing.JButton clear1;
+    private javax.swing.JButton clear2;
     private javax.swing.JRadioButton despachador;
+    private javax.swing.JRadioButton despachadorM;
     private javax.swing.JTextField existencia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblExistencia;
+    private javax.swing.JButton modificar;
+    private javax.swing.JTextField nomModificar;
+    private javax.swing.JTextField nombreB;
+    private javax.swing.JTextArea textArea;
+    private javax.swing.JTextArea textArea2;
     private javax.swing.JTextField txtFieldCedula;
     private javax.swing.JTextField txtFieldClave;
     private javax.swing.JTextField txtFieldNombre;
     private javax.swing.JRadioButton vendedor;
+    private javax.swing.JRadioButton vendedorM;
     // End of variables declaration//GEN-END:variables
 }
