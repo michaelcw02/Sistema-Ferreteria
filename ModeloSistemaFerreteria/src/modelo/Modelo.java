@@ -118,6 +118,7 @@ public class Modelo {
             return false;
         }
     }
+
     public Producto getProducto(String cod) {
         try {
             return conjuntoProductos.getProductoByCod(cod);
@@ -125,9 +126,11 @@ public class Modelo {
             return null;
         }
     }
+
     public LinkedList<Producto> getAllProductos() {
         return conjuntoProductos.getAllProductos();
     }
+
     public void updateProducto(String cod, String desc, String unidad, double precio, boolean activo) {
         Producto p = new Producto(cod, desc, unidad, precio, activo);
         try {
@@ -136,6 +139,7 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+
     public void deleteProducto(String cod) {
         try {
             conjuntoProductos.deleteProducto(cod);
@@ -152,21 +156,84 @@ public class Modelo {
             return false;
         }
     }
-    public void addEmpleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador){
-        Empleado emp= new Empleado(idEmpleado,nombre,clave,activo,vendedor,cajero,despachador,bodeguero,administrador);
+
+    public void addEmpleado(String idEmpleado, String nombre, String clave, boolean activo, boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+        Empleado emp = new Empleado(idEmpleado, nombre, clave, activo, vendedor, cajero, despachador, bodeguero, administrador);
         try {
             conjuntoEmpleados.addEmpleado(emp);
         } catch (Exception ex) {
         }
     }
-    public void deleteEmpleado(String id){
+
+    public void deleteEmpleado(String id) {
         try {
             conjuntoEmpleados.deleteEmpleado(id);
         } catch (Exception ex) {
         }
     }
-    
-    public LinkedList<Inventario>  getAllInventarios() {
+
+    public LinkedList<Empleado> searchEmpleadoByName(String nombre) {
+        try {
+            return conjuntoEmpleados.searchEmpleadoByName(nombre);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public Empleado searchEmpleadoByID(String id) {
+        try {
+            return conjuntoEmpleados.getEmpleadoByID(id);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public void updateEmpleado(Empleado empl) {
+        try {
+            conjuntoEmpleados.updateEmpleado(empl);
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public Empleado createEmpleado(String idEmpleado, String nombre, String clave, boolean activo,
+            boolean vendedor, boolean cajero, boolean despachador, boolean bodeguero, boolean administrador) {
+        Empleado empleado = new Empleado(idEmpleado, nombre, clave, activo, vendedor, cajero, despachador, bodeguero, administrador);
+        return empleado;
+    }
+
+    public String mensajeEmpleado(Empleado em) {
+        String nombre = em.getNombre();
+        String id = em.getIdEmpleado();
+        String clave = em.getClave();
+        String vendedor = "false";
+        if (em.isVendedor()) {
+            vendedor = "true";
+        }
+        String bodeguero = "false";
+        if (em.isBodeguero()) {
+            bodeguero = "true";
+        }
+        String cajero = "false";
+        if (em.isCajero()) {
+            cajero = "true";
+        }
+        String despachador = "false";
+        if (em.isDespachador()) {
+            despachador = "true";
+        }
+        String admi = "false";
+        if (em.isAdministrador()) {
+            admi = "true";
+        }
+
+        String msj = ("NOMBRE: " + nombre + '\n' + "CEDULA: " + id + '\n' + "CLAVE: " + clave
+                + '\n' + "ES_VENDEDOR: " + vendedor + '\n' + "ES_CAJERO: " + cajero + '\n' + "ES_BODEGUERO: "
+                + bodeguero + '\n' + "ES_DESPACHADOR: " + despachador + '\n' + "ES_ADMINISTRADOR: " + admi);
+        return msj;
+    }
+
+    public LinkedList<Inventario> getAllInventarios() {
         return conjuntoInventarios.getAllInventario();
     }
     public void addInventario(Date date, String pro, int cant) {
@@ -180,8 +247,7 @@ public class Modelo {
         }
         
     }
-    
-    
+
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
