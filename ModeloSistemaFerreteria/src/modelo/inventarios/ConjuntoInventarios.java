@@ -100,6 +100,19 @@ public class ConjuntoInventarios {
             throw new Exception("Inventario inexistente.");
         }
     }
+    public int getSumOfProduct(String idProducto) {
+        int cantidad = 0;
+        try {
+            String query = "SELECT SUM(Cantidad) AS CantidadTotal FROM `ferreteriadatos`.`inventario` WHERE Producto = '%s';";
+            query = String.format(query, idProducto);
+            ResultSet rs = dbc.executeQuery(query);
+            if (rs.next()) {
+                cantidad = rs.getInt("CantidadTotal");
+            }
+        } catch (Exception e) {
+        }
+        return cantidad;
+    }
     
     private Inventario inventario(ResultSet rs) throws Exception {
         try {
