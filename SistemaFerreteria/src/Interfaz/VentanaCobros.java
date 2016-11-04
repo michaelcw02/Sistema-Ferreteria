@@ -8,6 +8,7 @@ package Interfaz;
 import control.Control;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.swing.ButtonGroup;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -31,15 +32,21 @@ public class VentanaCobros extends javax.swing.JFrame {
         init();
     }
     public void init(){
-    updateTable();
+        setBlank();
+        initButtons();
+        updateTable();
     }
     private void setBlank() {
         pago.setText("");
         totalAPagar.setEditable(false);
         codigoFactura.setText("");
-        cheque.setSelected(false);
-        efectivo.setSelected(false);
-        tarjeta.setSelected(false);
+    }
+    private void initButtons() {
+        ButtonGroup group = new ButtonGroup();
+        group.add(cheque);
+        group.add(efectivo);
+        group.add(tarjeta);
+        efectivo.setSelected(true);
     }
     public void updateTable() {
         LinkedList<Factura> list= ctrl.getAllFacturas();
