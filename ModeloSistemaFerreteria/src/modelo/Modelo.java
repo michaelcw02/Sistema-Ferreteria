@@ -297,6 +297,13 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+    public void addFactura(Factura factura) {
+        try {
+            conjuntoFacturas.addFactura(factura);
+        } catch (Exception ex) {
+        }
+    }
+    
     //PAGO
     public void addPago(Pago pago){
         try {

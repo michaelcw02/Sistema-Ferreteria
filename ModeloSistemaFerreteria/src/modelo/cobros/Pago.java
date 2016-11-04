@@ -67,7 +67,7 @@ public class Pago {
     }
 
     public double getVuelto() {
-        return pago - factura.getTotal();
+        return pago - factura.calculateTotalPago();
     }
 
     public int getCounterTarjeta() {

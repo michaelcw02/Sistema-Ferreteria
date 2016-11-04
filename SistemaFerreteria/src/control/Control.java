@@ -212,6 +212,10 @@ public class Control {
     public void updateFactura(Factura factura) {
         modelo.updateFactura(factura);
     }
+    
+    public void addFactura(Factura factura) {
+        modelo.addFactura(factura);
+    }
 
     //PAGO
     public void addPago(Pago pago) {
