@@ -21,7 +21,7 @@ public class Factura {
         cliente = null;
         vendedor = null;
         fecha = null;
-        detalles = null;
+        detalles = new LinkedList<>();
         pagado = false;
         despachado = false;
     }    
@@ -60,6 +60,10 @@ public class Factura {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+    
+    public void agregarDetalle(LineaDetalle ld) {
+        detalles.add(ld);
     }
 
     public void setDetalles(LinkedList<LineaDetalle> detalles) {
