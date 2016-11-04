@@ -84,6 +84,7 @@ public class VentanaVentas extends javax.swing.JFrame {
         lblSubtotal.setText("0");
         lblDescuento.setText("0");
         lblTotal.setText("0");
+        clearTable();
         setBlank();
     }
     private void setBlank() {
@@ -112,31 +113,32 @@ public class VentanaVentas extends javax.swing.JFrame {
             model.addRow(o);
         }
     }
+    private void clearTable() {
+        DefaultTableModel model = (DefaultTableModel) tbleProductos.getModel();
+        model.setRowCount(0);
+    }
     private String dateToString(Date date) {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
     private void setClienteTxtField() {
         try {
-            String[] separado = txtFieldCedulaCliente.getText().split(" - ");
-            if(separado[0].equalsIgnoreCase("")) {
-                Cliente cli = ctrl.searchClienteByID(separado[0]);
+            String cedula = txtFieldCedulaCliente.getText();
+            if(!cedula.equalsIgnoreCase("")) {
+                Cliente cli = ctrl.searchClienteByID(cedula);
                 Cliente cliente = factura.getCliente();
-                if(cli != cliente) {
                     if (cli == null) {
                         cliente = new Cliente();
-                        cliente.setCedula(separado[0]);
-                        cliente.setNombre(separado[1]);
+                        cliente.setCedula(cedula);
                         cliente.setDescuento(Integer.parseInt(txtFieldDescuentoCli.getText()));
                         ctrl.addCliente(cliente);
                     } else {
                         cliente = cli;
-                        String cedula = cliente.getCedula();
+                        cedula = cliente.getCedula();
                         String nombre = cliente.getNombre();
                         txtFieldCedulaCliente.setText(cedula + " - " + nombre);
                         setDescuento(cliente.getDescuento());
                     }
-                }
                 factura.setCliente(cliente);
             }
         } catch (Exception e) {
@@ -146,8 +148,8 @@ public class VentanaVentas extends javax.swing.JFrame {
         int desc = Integer.parseInt(txtFieldDescuentoCli.getText());
         try {
             if (factura.getCliente().getDescuento() != desc) {
-                ctrl.updateCliente(factura.getCliente());
                 factura.getCliente().setDescuento(desc);
+                ctrl.updateCliente(factura.getCliente());
             }
         } catch (Exception e) {
         }
@@ -174,11 +176,17 @@ public class VentanaVentas extends javax.swing.JFrame {
             setBlank();
             updateTable();
         } else {
-            JOptionPane.showConfirmDialog(this, String.format(MENSAJE_CANTIDAD_INSUFICIENTE, cantidadLimite), "Error", 1);
+            JOptionPane.showMessageDialog(this, String.format(MENSAJE_CANTIDAD_INSUFICIENTE, cantidadLimite), "Error", 1);
         }
         lblDescuento.setText(String.valueOf(factura.getDescuento()));
         lblSubtotal.setText(String.valueOf(factura.subTotal()));
         lblTotal.setText(String.valueOf(factura.calculateTotalPago()));
+    }
+    private void agregarEmpleado() {
+        String emp = (String) cmBoxVendedores.getSelectedItem();
+        String empleado[] = emp.split(" - ");
+        Empleado e = ctrl.searchEmpleadoByID(empleado[0]);
+        factura.setVendedor(e);
     }
 
 
@@ -480,6 +488,7 @@ public class VentanaVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFieldDescuentoCliFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        agregarEmpleado();
         ctrl.addFactura(factura);
         init();
         setFactura(new Factura());

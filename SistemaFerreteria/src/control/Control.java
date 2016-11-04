@@ -77,7 +77,7 @@ public class Control {
         return modelo.searchClientByName(name);
     }
 
-    public Cliente createCLiente(String cedula, String nombre, String telefono, String email, int descuento) {
+    public Cliente createCliente(String cedula, String nombre, String telefono, String email, int descuento) {
         return modelo.createCliente(cedula, nombre, telefono, email, descuento);
     }
 
@@ -114,7 +114,7 @@ public class Control {
     public void mostrarVEmpleados() {
         empleados.show();
     }
-
+    
     public void mostrarProductos() {
         productos.show();
     }
