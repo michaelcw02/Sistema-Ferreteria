@@ -9,6 +9,8 @@ import Interfaz.*;
 import java.util.Date;
 import java.util.LinkedList;
 import modelo.Modelo;
+import modelo.cobros.Pago;
+import modelo.factura.Factura;
 import modelo.inventarios.Inventario;
 import modelo.personas.clientes.Cliente;
 import modelo.personas.empleados.Empleado;
@@ -30,6 +32,7 @@ public class Control {
         productos = new VCatalogoProductos(this);
         empleados = new VMantListaEmple(this);
         inventario = new VInventario(this);
+        cobro = new VentanaCobros(this);
         //
         setObservers();
     }
@@ -94,7 +97,7 @@ public class Control {
     }
 
     public String mensajeCliente(Cliente cliente) {
-       return  modelo.mensajeCliente(cliente);
+        return modelo.mensajeCliente(cliente);
     }
 
     public void mostrarClientes() {
@@ -111,6 +114,10 @@ public class Control {
 
     public void mostrarProductos() {
         productos.show();
+    }
+
+    public void mostrarCobro() {
+        cobro.show();
     }
 
     public void addProducto(String codigo, String descripcion, String medida, double precio, boolean activo) {
@@ -177,8 +184,27 @@ public class Control {
     public LinkedList<Inventario> getAllInventarios() {
         return modelo.getAllInventarios();
     }
+
     public void addInventario(Date date, String pro, int cant) {
         modelo.addInventario(date, pro, cant);
+    }
+
+    public Factura getFacturaByCod(int cod) {
+        return modelo.getFacturaByCod(cod);
+
+    }
+
+    public LinkedList<Factura> getAllFacturas() {
+        return modelo.getAllFacturas();
+    }
+
+    public void updateFactura(Factura factura) {
+        modelo.updateFactura(factura);
+    }
+
+    //PAGO
+    public void addPago(Pago pago) {
+        modelo.addPago(pago);
     }
 
     private Modelo modelo;
@@ -190,5 +216,6 @@ public class Control {
     private VCatalogoProductos productos;
     private VMantListaEmple empleados;
     private VInventario inventario;
+    private VentanaCobros cobro;
 
 }
