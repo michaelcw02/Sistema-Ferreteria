@@ -105,7 +105,7 @@ public class Modelo {
 
     public boolean verificarExistenciaCliente(String id) {
         try {
-            Cliente em = conjuntoClientes.getClienteByID(id);
+            conjuntoClientes.getClienteByID(id);
             return true;
         } catch (Exception ex) {
             return false;
