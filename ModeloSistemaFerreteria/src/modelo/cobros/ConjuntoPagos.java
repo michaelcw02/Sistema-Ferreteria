@@ -54,7 +54,7 @@ public class ConjuntoPagos {
         }
     }
     public void addPago(Pago pag) throws Exception {
-        String query = "INSERT INTO `ferreteriadatos`.`pago` (`Factura`, `TipoPago`, `Pago`) VALUES ('%d', '%d', '%f', '%d', '%d');";
+        String query = "INSERT INTO `ferreteriadatos`.`pago` (`Factura`, `TipoPago`, `Pago`,`CuentaCheque`,`CuentaTarjeta`) VALUES ('%d', '%d', '%f', '%d', '%d');";
         query = String.format(query, pag.getFactura().getCodigo(), pag.getTipoPago(), pag.getPago(), pag.getCounterCheque(), pag.getCounterTarjeta());
         int result = dbc.executeUpdate(query);
         if(result == 0)

@@ -24,7 +24,8 @@ public class Factura {
         detalles = new LinkedList<>();
         pagado = false;
         despachado = false;
-    }    
+    }
+
     public Factura(int codigo, Cliente cliente, Empleado vendedor) {
         this.codigo = codigo;
         this.cliente = cliente;
@@ -44,7 +45,10 @@ public class Factura {
         pagado = false;
         despachado = false;
     }
-    
+
+    public double getDescuento() {
+        return cliente.getDescuento();
+    }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -108,8 +112,16 @@ public class Factura {
 
     public Double getTotal() {
         return 1000.234;    //THIS IS TEMPORARY
-    }    
-     public double calculateTotalPago() {
+    }
+
+    public double calculateTotalPago() {
+        if (getDescuento() > 0) 
+            return (subTotal() - (subTotal() * getDescuento()));
+        else 
+            return subTotal();
+    }
+
+    public double subTotal() {
         double pag = 0;
         LinkedList<LineaDetalle> pagos = getDetalles();
         for (LineaDetalle detalle : pagos) {
