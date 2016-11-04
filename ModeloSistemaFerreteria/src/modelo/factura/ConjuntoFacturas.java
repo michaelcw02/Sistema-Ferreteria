@@ -180,7 +180,7 @@ public class ConjuntoFacturas {
     public LinkedList<LineaDetalle> searchDetallesByFactura(int cod) throws Exception{
         LinkedList<LineaDetalle> listaResultado = new LinkedList<>();
         try {
-            String query = "SELECT * " + "FROM LineaDetalle WHERE Factura like '%d%'";
+            String query = "SELECT * " + "FROM LineaDetalle WHERE Factura = '%d'";
             query = String.format(query, cod);
             ResultSet rs = dbc.executeQuery(query);
             while (rs.next()) {
