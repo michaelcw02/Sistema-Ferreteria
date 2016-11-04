@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import modelo.database.DataBaseConnection;
+import modelo.inventarios.Inventario;
 import modelo.personas.clientes.*;
 import modelo.personas.empleados.*;
 import modelo.productos.*;
@@ -24,7 +25,19 @@ public class ConjuntoFacturas {
         this.dbc = dbc;
     }
     
-    
+    public LinkedList<Factura> getAllFacturas() {
+        LinkedList<Factura> listaResultado = new LinkedList<>();
+        try {
+            String query = "SELECT * " + "FROM Factura;";
+            query = String.format(query);
+            ResultSet rs = dbc.executeQuery(query);
+            while (rs.next())
+                listaResultado.add(factura(rs));
+        } catch (Exception e) {
+            
+        }
+        return listaResultado;
+    }
     public Factura getFacturaByCod(int codigo) throws Exception{
         String query = "SELECT * " + "FROM Factura WHERE Codigo = '%d'";
         query = String.format(query, codigo);

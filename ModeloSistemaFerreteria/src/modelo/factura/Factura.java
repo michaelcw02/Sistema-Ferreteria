@@ -105,7 +105,15 @@ public class Factura {
     public Double getTotal() {
         return 1000.234;    //THIS IS TEMPORARY
     }    
-    
+     public double calculateTotalPago() {
+        double pag = 0;
+        LinkedList<LineaDetalle> pagos = getDetalles();
+        for (LineaDetalle detalle : pagos) {
+            pag += (detalle.getCantidad() * detalle.getPrecio());
+        }
+        return pag;
+    }
+
     int codigo; //autogenerado..
     Cliente cliente;
     Empleado vendedor;

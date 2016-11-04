@@ -12,8 +12,10 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.cobros.ConjuntoPagos;
+import modelo.cobros.Pago;
 import modelo.database.DataBaseConnection;
 import modelo.factura.ConjuntoFacturas;
+import modelo.factura.Factura;
 import modelo.inventarios.ConjuntoInventarios;
 import modelo.inventarios.Inventario;
 import modelo.personas.clientes.*;
@@ -116,11 +118,12 @@ public class Modelo {
         String telefono = cliente.getTelefono();
         String id = cliente.getCedula();
         int descuento = cliente.getDescuento();
-        String msj=("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
-                                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
-                                + '\n' + "MONTO DESCUENTO: " + descuento+'\n');
+        String msj = ("NOMBRE: " + nombre + '\n' + "EMAIL: " + email
+                + '\n' + "TELEFONO: " + telefono + '\n' + "CEDULA: " + id
+                + '\n' + "MONTO DESCUENTO: " + descuento + '\n');
         return msj;
     }
+
     //PRODUCTOS.....
     public void addProducto(String cod, String desc, String unidad, double precio, boolean activo) {
         Producto p = new Producto(cod, desc, unidad, precio, activo);
@@ -269,7 +272,30 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
-
+//FACTURA
+    public Factura getFacturaByCod(int cod) {
+        try {
+            return conjuntoFacturas.getFacturaByCod(cod);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    public LinkedList<Factura> getAllFacturas(){
+       return conjuntoFacturas.getAllFacturas();
+    }
+    public void updateFactura(Factura factura){
+        try {
+            conjuntoFacturas.updateFactura(factura);
+        } catch (Exception ex) {
+        }
+    }
+    //PAGO
+    public void addPago(Pago pago){
+        try {
+            conjuntoPagos.addPago(pago);
+        } catch (Exception ex) {
+        }
+    }
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;

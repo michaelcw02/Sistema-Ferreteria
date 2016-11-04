@@ -5,7 +5,9 @@
  */
 package modelo.cobros;
 
+import java.util.LinkedList;
 import modelo.factura.Factura;
+import modelo.factura.LineaDetalle;
 
 /**
  *
@@ -28,7 +30,7 @@ public class Pago {
         this.counterTarjeta = counterTarjeta;
         this.counterCheque = counterCheque;
     }
-    
+
     public void setFactura(Factura factura) {
         this.factura = factura;
     }
@@ -60,7 +62,7 @@ public class Pago {
     public double getPago() {
         return pago;
     }
-    
+
     public double getVuelto() {
         return pago - factura.getTotal();
     }
@@ -72,13 +74,12 @@ public class Pago {
     public int getCounterCheque() {
         return counterCheque;
     }
-    
-    
+
+   
     public void imprimirPDF() {
-        
-    }    
-    
-    
+
+    }
+
     Factura factura;
     int tipoPago; //1: Efectivo, 2: Tarjeta, 3: Cheque.
     double pago;

@@ -27,7 +27,7 @@ public class ConjuntoPagos {
         ResultSet rs = dbc.executeQuery(query);
         if(rs.next()) {
             return pago(rs);
-        }
+        }   
         else {
             throw new Exception("Pago inexistente.");
         }
