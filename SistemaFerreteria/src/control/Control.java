@@ -105,6 +105,7 @@ public class Control {
     }
 
     public void mostrarVentas() {
+        ventas.setFecha(new Date());
         ventas.show();
     }
 
@@ -167,6 +168,9 @@ public class Control {
     public LinkedList<Empleado> searchEmpleadoByName(String nom) {
         return modelo.searchEmpleadoByName(nom);
     }
+    public LinkedList<Empleado> getEmpleadosVendedor() {
+        return modelo.getEmpleadosVendedor();
+    }
 
     public LinkedList<Producto> getAllProductos() {
         return modelo.getAllProductos();
@@ -207,6 +211,12 @@ public class Control {
         modelo.addPago(pago);
     }
 
+    public int getSumOfProduct(String idProducto) {
+        return modelo.getSumOfProduct(idProducto);
+    }
+    
+    
+    
     private Modelo modelo;
     private VentanaLogin login;
     private VentanaMenu menu;
