@@ -103,8 +103,9 @@ public class Control {
     public void mostrarClientes() {
         clientes.show();
     }
-
+    
     public void mostrarVentas() {
+        ventas.setFactura(new Factura());
         ventas.setFecha(new Date());
         ventas.show();
     }
