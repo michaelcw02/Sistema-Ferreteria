@@ -530,7 +530,7 @@ public class VentanaCliente extends javax.swing.JFrame {
             String tel = txtFieldTel.getText();
             String email = textFieldEmail.getText();
             int descuento = Integer.parseInt(textFieldDescuento.getText());
-            Cliente cliente = ctrl.createCLiente(cedula, nombre, tel, email, descuento);
+            Cliente cliente = ctrl.createCliente(cedula, nombre, tel, email, descuento);
             try {
                 ctrl.addCliente(cliente);
                 JOptionPane.showMessageDialog(this, "Cliente insertado", "ADVICE", 1);
@@ -555,7 +555,7 @@ public class VentanaCliente extends javax.swing.JFrame {
         int descuento = Integer.parseInt(descuentoModificar.getText());
         JOptionPane.showMessageDialog(this, "Cliente modificado con exito", "AVISO", 1);
         try {
-            ctrl.updateCliente(ctrl.createCLiente(id, nom, tel, email, descuento));
+            ctrl.updateCliente(ctrl.createCliente(id, nom, tel, email, descuento));
         } catch (Exception ex) {
         }
         nomModificar.setText("");
