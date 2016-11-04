@@ -33,6 +33,7 @@ public class Control {
         empleados = new VMantListaEmple(this);
         inventario = new VInventario(this);
         cobro = new VentanaCobros(this);
+        despacho = new VentanaDespacho(this);
         //
         setObservers();
     }
@@ -168,6 +169,7 @@ public class Control {
     public LinkedList<Empleado> searchEmpleadoByName(String nom) {
         return modelo.searchEmpleadoByName(nom);
     }
+
     public LinkedList<Empleado> getEmpleadosVendedor() {
         return modelo.getEmpleadosVendedor();
     }
@@ -178,6 +180,10 @@ public class Control {
 
     public void modificarProducto(String cod, String des, String med, double precio, boolean activo) {
         modelo.updateProducto(cod, des, med, precio, activo);
+    }
+
+    public void mostrarDespacho() {
+        despacho.show();
     }
 
     public void mostrarInventario() {
@@ -214,9 +220,7 @@ public class Control {
     public int getSumOfProduct(String idProducto) {
         return modelo.getSumOfProduct(idProducto);
     }
-    
-    
-    
+
     private Modelo modelo;
     private VentanaLogin login;
     private VentanaMenu menu;
@@ -227,5 +231,6 @@ public class Control {
     private VMantListaEmple empleados;
     private VInventario inventario;
     private VentanaCobros cobro;
+    private VentanaDespacho despacho;
 
 }

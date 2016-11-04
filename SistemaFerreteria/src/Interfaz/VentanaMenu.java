@@ -138,6 +138,11 @@ public class VentanaMenu extends javax.swing.JFrame {
         });
 
         btnDespacho.setText("Despacho");
+        btnDespacho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDespachoActionPerformed(evt);
+            }
+        });
 
         btnClientes.setText("Mantenimiento Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -240,6 +245,10 @@ public class VentanaMenu extends javax.swing.JFrame {
     private void btnCobrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrosActionPerformed
         ctrl.mostrarCobro();
     }//GEN-LAST:event_btnCobrosActionPerformed
+
+    private void btnDespachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespachoActionPerformed
+      ctrl.mostrarDespacho();
+    }//GEN-LAST:event_btnDespachoActionPerformed
     
     
     private Control ctrl;
