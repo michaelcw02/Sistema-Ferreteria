@@ -223,6 +223,7 @@ public class VentanaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        this.dispose();
         ctrl.mostrarClientes();
     }//GEN-LAST:event_btnClientesActionPerformed
 
@@ -232,6 +233,7 @@ public class VentanaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        this.dispose();
         ctrl.mostrarVEmpleados();
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
