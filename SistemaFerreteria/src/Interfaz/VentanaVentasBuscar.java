@@ -55,7 +55,7 @@ public class VentanaVentasBuscar extends javax.swing.JFrame {
         Object o[];
         for(Producto p : list) {
             int cant = ctrl.getSumOfProduct(p.getCodigo());
-            o = new Object[]{p.getCodigo(), p.getDescripcion(), p.getUnidadMedida(), p.getPrecio(), cant};
+            o = new Object[]{p.getCodigo(), p.getDescripcion(), p.getUnidadMedida(), p.getPrecio(), p.isActivo(), cant};
             model.addRow(o);
         }
     }
@@ -112,10 +112,13 @@ public class VentanaVentasBuscar extends javax.swing.JFrame {
         //GET PRECIO
         value = table1.getModel().getValueAt(row, column++).toString();
         p.setPrecio(Double.parseDouble(value));
+        //GET ACTIVO
+        value = table1.getModel().getValueAt(row, column++).toString();
+        p.setActivo( (value == "true") ? true : false );
         //GET CANTIDAD
         value = table1.getModel().getValueAt(row, column++).toString();
         
-        ventas.setCantidad(Integer.parseInt(value));
+        ventas.setCantidadLimite(Integer.parseInt(value));
         ventas.setProducto(p);
         
         this.dispose();
@@ -161,14 +164,14 @@ public class VentanaVentasBuscar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Medida", "Precio", "Cantidad"
+                "Codigo", "Descripcion", "Medida", "Precio", "Activo", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
