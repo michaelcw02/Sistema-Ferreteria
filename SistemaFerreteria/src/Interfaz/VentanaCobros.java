@@ -122,6 +122,7 @@ public class VentanaCobros extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         vuelto = new javax.swing.JTextField();
         pagar = new javax.swing.JButton();
+        home = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -180,6 +181,13 @@ public class VentanaCobros extends javax.swing.JFrame {
             }
         });
 
+        home.setText("Home");
+        home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,14 +232,22 @@ public class VentanaCobros extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(181, 181, 181)
                 .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(home)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(16, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(home)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,12 +306,19 @@ public class VentanaCobros extends javax.swing.JFrame {
         }
         Pago  pag = new Pago(fac, tipoPago, totalPago, count, count1);
         ctrl.addPago(pag);
+        pag.imprimirPDF();
     }//GEN-LAST:event_pagarActionPerformed
+
+    private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
+        this.dispose();
+        ctrl.mostrarMenu();
+    }//GEN-LAST:event_homeActionPerformed
     private Control ctrl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton cheque;
     private javax.swing.JTextField codigoFactura;
     private javax.swing.JRadioButton efectivo;
+    private javax.swing.JButton home;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
