@@ -18,9 +18,9 @@ public class Factura {
 
     public Factura() {
         codigo = -1;
-        cliente = null;
-        vendedor = null;
-        fecha = null;
+        cliente = new Cliente();
+        vendedor = new Empleado();
+        fecha = new Date();
         detalles = new LinkedList<>();
         pagado = false;
         despachado = false;
@@ -47,7 +47,7 @@ public class Factura {
     }
 
     public double getDescuento() {
-        return cliente.getDescuento();
+        return cliente.getDescuento()/100;
     }
 
     public void setCodigo(int codigo) {
@@ -108,10 +108,6 @@ public class Factura {
 
     public boolean isDespachado() {
         return despachado;
-    }
-
-    public Double getTotal() {
-        return 1000.234;    //THIS IS TEMPORARY
     }
 
     public double calculateTotalPago() {
