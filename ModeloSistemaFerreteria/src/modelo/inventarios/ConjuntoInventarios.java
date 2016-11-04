@@ -49,7 +49,7 @@ public class ConjuntoInventarios {
     public LinkedList<Inventario> searchInventarioByProducto(String codigo) {
         LinkedList<Inventario> listaResultado = new LinkedList<>();
         try {
-            String query = "SELECT * " + "FROM Inventario WHERE Producto like '%%%s%%'";
+            String query = "SELECT * " + "FROM Inventario WHERE Producto = '%s'";
             query = String.format(query, codigo);
             ResultSet rs = dbc.executeQuery(query);
             while (rs.next()) {
@@ -95,7 +95,6 @@ public class ConjuntoInventarios {
         
         String query = "UPDATE `ferreteriadatos`.`inventario` SET `Cantidad`='%d', `isActivo`='%d' WHERE `Fecha`='%s' and`Producto`='%s';";
         query = String.format(query, inv.getCantidad(), toInt(inv.isActivo()), dateToSQL(inv.getFecha()), inv.getProducto().getCodigo());
-        System.out.println(query);
         int result = dbc.executeUpdate(query);
         if(result == 0) {
             throw new Exception("Inventario inexistente.");
