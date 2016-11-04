@@ -56,6 +56,19 @@ public class ConjuntoEmpleados {
         }
         return listaResultado;
     }
+    public LinkedList<Empleado> getEmpleadosByRole(String papel) throws Exception{
+        LinkedList<Empleado> listaResultado = new LinkedList<>();
+        try {
+            String query = "SELECT * " + "FROM Empleado WHERE %s = 1;";
+            query = String.format(query, papel);
+            ResultSet rs = dbc.executeQuery(query);
+            while (rs.next()) {
+                listaResultado.add(empleado(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return listaResultado;
+    }
     public void deleteEmpleado(String id) throws Exception{
         String query = "DELETE FROM Empleado WHERE ID_EMPLEADO = '%s'";
         query = String.format(query, id);
