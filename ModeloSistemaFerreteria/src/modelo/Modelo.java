@@ -257,7 +257,15 @@ public class Modelo {
                 + bodeguero + '\n' + "ES_DESPACHADOR: " + despachador + '\n' + "ES_ADMINISTRADOR: " + admi);
         return msj;
     }
-
+    public LinkedList<Empleado> getEmpleadosVendedor() {
+        try {
+            return conjuntoEmpleados.getEmpleadosByRole("isVendedor");
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    
+    
     public LinkedList<Inventario> getAllInventarios() {
         return conjuntoInventarios.getAllInventario();
     }
@@ -296,6 +304,10 @@ public class Modelo {
         } catch (Exception ex) {
         }
     }
+    public int getSumOfProduct(String idProducto) { 
+        return conjuntoInventarios.getSumOfProduct(idProducto);
+    }
+
     public static Modelo instance;
     AdaptadorSubject observers;
     DataBaseConnection dbc;
