@@ -32,6 +32,8 @@
               <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,8 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="7" max="32767" attributes="0"/>
               <Component id="jTabbedPane2" min="-2" pref="325" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -88,7 +93,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtFieldNombre" min="-2" pref="160" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lblExistencia" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblExistencia" min="-2" pref="92" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="textFieldDescuento" alignment="0" max="32767" attributes="0"/>
@@ -102,7 +107,7 @@
                               <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="175" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -113,7 +118,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblExistencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblExistencia" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -164,21 +169,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldNombre">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Nombre(String)&gt;"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldCedula">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Cedula(String)&gt;"/>
-              </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFieldCedulaFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtFieldTel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Telefono (String)&gt;"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[160, 24]"/>
                 </Property>
@@ -193,9 +191,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblExistencia">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Existencia de cliente&gt;"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -208,14 +203,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textFieldEmail">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Email(String)&gt;"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textFieldDescuento">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;Descuento(int)&gt;"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -416,15 +405,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="164" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="91" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel5" min="-2" pref="61" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cedula" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="existencia" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="existencia" min="-2" pref="52" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -441,11 +430,11 @@
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cedula" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="cedula" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="existencia" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="existencia" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="borrar" min="-2" max="-2" attributes="0"/>
@@ -456,9 +445,6 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="cedula">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="cedula&lt;String&gt;"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cedulaFocusLost"/>
                   </Events>
@@ -474,7 +460,6 @@
                 <Component class="javax.swing.JTextField" name="existencia">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="text" type="java.lang.String" value="&lt;Existencia de cliente&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="borrar">
@@ -691,5 +676,13 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Home"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

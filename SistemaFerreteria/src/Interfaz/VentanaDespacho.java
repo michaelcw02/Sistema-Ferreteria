@@ -37,12 +37,19 @@ public class VentanaDespacho extends javax.swing.JFrame implements Observer{
     private void init() {
        setBlank();
         addDocumentListener(buscar, tableFacturas);
+        clear();
         updateTable();
         addActions();
     } 
     private void setBlank() {
         eleccion.setText("");
     }
+    private void clear(){
+       for (int i = 0; i < tableFacturas.getRowCount(); i++) {
+           tableFacturas.removeAll();
+          
+       }
+   }
     
     @Override
     public void update() {
@@ -54,7 +61,7 @@ public class VentanaDespacho extends javax.swing.JFrame implements Observer{
         model.setRowCount(0);
         Object o[];
         for (Factura fac : list) {
-            if (!fac.isDespachado()) {
+            if (fac.isDespachado()==false) {
                 o = new Object[]{fac.getCodigo(), dateToString(fac.getFecha()), fac.getVendedor().getNombre(), fac.getCliente().getNombre(), fac.isPagado()};
                 model.addRow(o);
             }

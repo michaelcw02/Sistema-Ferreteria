@@ -89,6 +89,7 @@ public class VentanaCliente extends javax.swing.JFrame {
         textArea2 = new javax.swing.JTextArea();
         clear1 = new javax.swing.JButton();
         clear2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,16 +102,12 @@ public class VentanaCliente extends javax.swing.JFrame {
 
         jLabel4.setText("Telefono del cliente:");
 
-        txtFieldNombre.setText("<Nombre(String)>");
-
-        txtFieldCedula.setText("<Cedula(String)>");
         txtFieldCedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtFieldCedulaFocusLost(evt);
             }
         });
 
-        txtFieldTel.setText("<Telefono (String)>");
         txtFieldTel.setPreferredSize(new java.awt.Dimension(160, 24));
 
         btnAgregar.setText("Agregar");
@@ -120,15 +117,9 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        lblExistencia.setText("<Existencia de cliente>");
-
         jLabel6.setText("Email del cliente:");
 
         jLabel18.setText("Monto de descuento:");
-
-        textFieldEmail.setText("<Email(String)>");
-
-        textFieldDescuento.setText("<Descuento(int)>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -150,7 +141,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblExistencia))
+                                .addComponent(lblExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(textFieldDescuento, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(textFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +149,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(btnAgregar)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +158,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblExistencia))
+                    .addComponent(lblExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -292,12 +283,11 @@ public class VentanaCliente extends javax.swing.JFrame {
                     .addComponent(jLabel20))
                 .addGap(18, 18, 18)
                 .addComponent(modificar)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Modificacion de Cliente", jPanel3);
 
-        cedula.setText("cedula<String>");
         cedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cedulaFocusLost(evt);
@@ -308,7 +298,6 @@ public class VentanaCliente extends javax.swing.JFrame {
         jLabel5.setText("Cedula: ");
 
         existencia.setEditable(false);
-        existencia.setText("<Existencia de cliente>");
 
         borrar.setText("Borrar");
         borrar.addActionListener(new java.awt.event.ActionListener() {
@@ -327,14 +316,14 @@ public class VentanaCliente extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(jLabel7)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 164, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(158, 158, 158))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(202, 202, 202)
@@ -348,10 +337,10 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(borrar)
                 .addContainerGap(164, Short.MAX_VALUE))
@@ -486,6 +475,13 @@ public class VentanaCliente extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Buscar Cliente", jPanel1);
 
+        jButton1.setText("Home");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -497,14 +493,18 @@ public class VentanaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(145, 145, 145)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -650,6 +650,11 @@ public class VentanaCliente extends javax.swing.JFrame {
         nombreB.setText(" ");
     }//GEN-LAST:event_clear2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         this.dispose();
+        ctrl.mostrarMenu();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private Control ctrl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrar;
@@ -666,6 +671,7 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JTextField descuentoModificar;
     private javax.swing.JTextField emailModificar;
     private javax.swing.JTextField existencia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

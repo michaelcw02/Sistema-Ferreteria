@@ -92,6 +92,7 @@ public class VMantListaEmple extends javax.swing.JFrame {
         textArea2 = new javax.swing.JTextArea();
         clear1 = new javax.swing.JButton();
         clear2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,16 +106,17 @@ public class VMantListaEmple extends javax.swing.JFrame {
 
         jLabel4.setText("Clave de empleado:");
 
-        txtFieldNombre.setText("<Nombre(String)>");
-
-        txtFieldCedula.setText("<Cedula(String)>");
         txtFieldCedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtFieldCedulaFocusLost(evt);
             }
         });
+        txtFieldCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldCedulaActionPerformed(evt);
+            }
+        });
 
-        txtFieldClave.setText("<Clave (String)>");
         txtFieldClave.setPreferredSize(new java.awt.Dimension(160, 24));
 
         btnAgregar.setText("Agregar");
@@ -123,8 +125,6 @@ public class VMantListaEmple extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-
-        lblExistencia.setText("<Existencia de empleado>");
 
         jLabel6.setText("Roles:");
 
@@ -176,7 +176,7 @@ public class VMantListaEmple extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(btnAgregar)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +341,6 @@ public class VMantListaEmple extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Modificacion de Empleado", jPanel3);
 
-        cedula.setText("cedula<String>");
         cedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cedulaFocusLost(evt);
@@ -352,7 +351,6 @@ public class VMantListaEmple extends javax.swing.JFrame {
         jLabel5.setText("Cedula: ");
 
         existencia.setEditable(false);
-        existencia.setText("<Existencia de empleado>");
 
         borrar.setText("Borrar");
         borrar.addActionListener(new java.awt.event.ActionListener() {
@@ -371,15 +369,15 @@ public class VMantListaEmple extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(jLabel7)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
-                .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(202, 202, 202)
                 .addComponent(borrar)
@@ -398,14 +396,16 @@ public class VMantListaEmple extends javax.swing.JFrame {
                         .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(borrar)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 85, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,6 +530,13 @@ public class VMantListaEmple extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Buscar Empleado", jPanel1);
 
+        jButton1.setText("HOME");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -539,14 +546,19 @@ public class VMantListaEmple extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(59, 59, 59))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -686,6 +698,15 @@ public class VMantListaEmple extends javax.swing.JFrame {
         textArea2.setText(" ");
         nombreB.setText(" ");      
     }//GEN-LAST:event_clear2ActionPerformed
+
+    private void txtFieldCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldCedulaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        ctrl.mostrarMenu();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void clearModificar() {
         nomModificar.setText(" ");
         cedModificar.setText(" ");
@@ -719,6 +740,7 @@ public class VMantListaEmple extends javax.swing.JFrame {
     private javax.swing.JRadioButton despachador;
     private javax.swing.JRadioButton despachadorM;
     private javax.swing.JTextField existencia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
