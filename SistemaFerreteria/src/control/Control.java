@@ -41,6 +41,8 @@ public class Control {
     private void setObservers() {
         modelo.agregar(productos);
         modelo.agregar(inventario);
+        modelo.agregar(despacho);
+        modelo.agregar(cobro);
         //this keeeps going down.
     }
 

@@ -6,13 +6,11 @@
 package Interfaz;
 
 import control.Control;
+import interfaces.Observer;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
 import javax.swing.RowFilter;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -26,7 +24,7 @@ import modelo.factura.Factura;
  *
  * @author Laura Alfaro
  */
-public class VentanaDespacho extends javax.swing.JFrame {
+public class VentanaDespacho extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form VentanaMantenimiento
@@ -45,7 +43,11 @@ public class VentanaDespacho extends javax.swing.JFrame {
     private void setBlank() {
         eleccion.setText("");
     }
-
+    
+    @Override
+    public void update() {
+        updateTable();
+    }
     public void updateTable() {
         LinkedList<Factura> list = ctrl.getAllFacturas();
         DefaultTableModel model = (DefaultTableModel) tableFacturas.getModel();
@@ -267,4 +269,5 @@ public class VentanaDespacho extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableFacturas;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -6,22 +6,21 @@
 package Interfaz;
 
 import control.Control;
+import interfaces.Observer;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.swing.ButtonGroup;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.cobros.Pago;
 import modelo.factura.Factura;
-import modelo.inventarios.Inventario;
 
 /**
  *
  * @author Laura Alfaro
  */
-public class VentanaCobros extends javax.swing.JFrame {
+public class VentanaCobros extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form VentanaCobros
@@ -49,6 +48,11 @@ public class VentanaCobros extends javax.swing.JFrame {
         group.add(efectivo);
         group.add(tarjeta);
         efectivo.setSelected(true);
+    }
+    
+    @Override
+    public void update() {
+        updateTable();
     }
     public void updateTable() {
         LinkedList<Factura> list= ctrl.getAllFacturas();
